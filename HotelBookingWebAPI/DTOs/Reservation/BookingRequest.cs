@@ -26,7 +26,7 @@ namespace HotelBookingWebAPI.DTOs.Reservation
     }
     public class AvailableDateRequest
     {
-        public DateTime CheckIn { get; set; }
-        public DateTime CheckOut { get; set; }
+        public string CheckIn { get; set; }
+        public string CheckOut { get; set; }
     }
 }

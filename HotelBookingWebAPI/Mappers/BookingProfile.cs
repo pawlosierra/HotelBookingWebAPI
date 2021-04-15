@@ -12,7 +12,10 @@ namespace HotelBookingWebAPI.Mappers
     {
         public BookingProfile()
         {
-            CreateMap<BookingRequest, Booking>();
+            CreateMap<BookingRequest, Booking>()
+                .ForMember(dest => dest.Client, opt => opt.MapFrom(src => src.ClientRequest))
+                .ForMember(dest => dest.Room, opt => opt.MapFrom(src => src.RoomRequest))
+                .ForMember(dest => dest.availableDate, opt => opt.MapFrom(src => src.AvailableDateRequest));
             CreateMap<Booking, BookingResponse>();
 
             CreateMap<AvailableDateRequest, AvailableDate>();

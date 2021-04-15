@@ -2,6 +2,7 @@
 using HotelBookingWebAPI.Domain.Models.Reservation;
 using HotelBookingWebAPI.Domain.Repositories;
 using HotelBookingWebAPI.Infrastructure.Data;
+using HotelBookingWebAPI.Infrastructure.Models.Reservation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -26,9 +27,11 @@ namespace HotelBookingWebAPI.Infrastructure.Repositories
             return result;
         }
 
-        public async Task<Booking> AddBooking()
+        public async Task<Booking> AddBooking(Booking booking)
         {
-            return null;
+            var bookingModel = _mapper.Map<BookingModel>(booking);
+            _roomContext.SerializeBooking(bookingModel);
+            return booking;
         }
     }
 }
