@@ -13,8 +13,4 @@
     <ProjectReference Include="..\HotelBookingWebAPI.Infrastructure\HotelBookingWebAPI.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
-
 </Project>

@@ -5,11 +5,14 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
+using HotelBookingWebAPI.Application.Commands.Reservation.AddHotelBooking;
 using HotelBookingWebAPI.Application.Queries.Reservation.GetAllRooms;
 using HotelBookingWebAPI.Application.Queries.Reservation.GetAllRoomsAvailability;
 using HotelBookingWebAPI.Application.Queries.Reservation.GetRoomAvailabilityByCapacity;
 using HotelBookingWebAPI.Application.Queries.Reservation.GetRoomAvailabilityByDate;
 using HotelBookingWebAPI.Application.Queries.Reservation.GetRoomAvailabilityByPrice;
+using HotelBookingWebAPI.Domain.Models.Reservation;
+using HotelBookingWebAPI.DTOs.Reservation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -101,6 +104,21 @@ namespace HotelBookingWebAPI.Controllers
             try
             {
                 var result = await _mediator.Send(new GetRoomAvailabilityByPrice(price));
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        [HttpPost("addHotelBooking")]
+        public async Task<IActionResult> AddHotelBooking(BookingRequest bookingRequest)
+        {
+            try
+            {
+                var booking = _mapper.Map<Booking>(bookingRequest);
+                var result = await _mediator.Send(new AddHotelBooking(booking));
                 return Ok(result);
             }
             catch (Exception ex)

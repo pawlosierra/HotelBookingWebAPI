@@ -1,7 +1,7 @@
 [
   {
     "RoomNumber": 101,
-    "PriceNight": 500.99,
+    "PriceNight": 500.00,
     "Availability": true,
     "Capacity": 4,
     "AvailableDateModel": [
@@ -21,7 +21,7 @@
   },
   {
     "RoomNumber": 202,
-    "PriceNight": 1000.50,
+    "PriceNight": 1000.00,
     "Availability": false,
     "Capacity": 2,
     "AvailableDateModel": [
@@ -65,7 +65,7 @@
   },
   {
     "RoomNumber": 304,
-    "PriceNight": 450.99,
+    "PriceNight": 450.00,
     "Availability": true,
     "Capacity": 2,
     "AvailableDateModel": [

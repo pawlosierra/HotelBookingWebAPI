@@ -25,5 +25,10 @@ namespace HotelBookingWebAPI.Infrastructure.Repositories
             var result = _mapper.Map<IEnumerable<Room>>(rooms);
             return result;
         }
+
+        public async Task<Booking> AddBooking()
+        {
+            return null;
+        }
     }
 }

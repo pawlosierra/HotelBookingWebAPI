@@ -12,12 +12,16 @@ namespace HotelBookingWebAPI.Mappers
     {
         public BookingProfile()
         {
+            CreateMap<BookingRequest, Booking>();
             CreateMap<Booking, BookingResponse>();
 
+            CreateMap<AvailableDateRequest, AvailableDate>();
             CreateMap<AvailableDate, AvailableDateResponse>();
 
+            CreateMap<ClientRequest, Client>();
             CreateMap<Client, ClientResponse>();
 
+            CreateMap<RoomRequest, Room>();
             CreateMap<Room, RoomResponse>();
         }
     }
