@@ -44,5 +44,11 @@ namespace HotelBookingWebAPI.Infrastructure.Repositories
             _roomContext.SerializeBookings(bookingModels);
             return upDateBooking;
         }
+        public async Task<IEnumerable<Booking>> DeleteBooking(IEnumerable<Booking> upDateBooking)
+        {
+            var bookingModels = _mapper.Map<IEnumerable<BookingModel>>(upDateBooking);
+            _roomContext.SerializeBookings(bookingModels);
+            return upDateBooking;
+        }
     }
 }

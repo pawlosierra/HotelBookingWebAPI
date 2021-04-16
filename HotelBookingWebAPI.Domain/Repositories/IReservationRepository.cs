@@ -12,5 +12,6 @@ namespace HotelBookingWebAPI.Domain.Repositories
         Task<IEnumerable<Booking>> GetAllBookings();
         Task<Booking> AddBooking(Booking booking);
         Task<IEnumerable<Booking>> UpDateBooking(IEnumerable<Booking> upDateBooking);
+        Task<IEnumerable<Booking>> DeleteBooking(IEnumerable<Booking>upDateBooking);
     }
 }

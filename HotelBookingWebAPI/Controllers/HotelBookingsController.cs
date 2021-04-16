@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using HotelBookingWebAPI.Application.Commands.Reservation.AddHotelBooking;
+using HotelBookingWebAPI.Application.Commands.Reservation.DeleteBooking;
 using HotelBookingWebAPI.Application.Commands.Reservation.UpDateBooking;
 using HotelBookingWebAPI.Application.Queries.Reservation.GetAllBookings;
 using HotelBookingWebAPI.Application.Queries.Reservation.GetAllRooms;
@@ -149,6 +150,20 @@ namespace HotelBookingWebAPI.Controllers
             {
                 var bookingUpDateRequest = _mapper.Map<Booking>(bookingUpDate);
                 var result = await _mediator.Send(new UpDateBooking(bookingUpDateRequest, bookingNumber));
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        [HttpDelete("deleteBooking/{bookingNumber}")]
+        public async Task<IActionResult> DeleteBooking(int bookingNumber)
+        {
+            try
+            {
+                var result = await _mediator.Send(new DeleteBooking(bookingNumber));
                 return Ok(result);
             }
             catch (Exception ex)
