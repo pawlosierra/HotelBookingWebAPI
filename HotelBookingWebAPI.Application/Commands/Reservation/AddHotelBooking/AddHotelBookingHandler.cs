@@ -42,6 +42,7 @@ namespace HotelBookingWebAPI.Application.Commands.Reservation.AddHotelBooking
                 bookingRequired.Client = booking.Client;
                 bookingRequired.availableDate = booking.availableDate;
                 bookingRequired.Room = item;
+                bookingRequired.BookingNumber = new Random().Next(10000, 100000);
             }
             return bookingRequired;
         }

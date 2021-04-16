@@ -1,1 +1,23 @@
-[{"clientModel":{"passport":"AU0001","name":"Juan","lastName":"Sierra","email":"pawlosierra@hotmail.com","cellPhoneNumber":"3182325555"},"roomModel":{"roomNumber":101,"priceNight":500.00,"availability":true,"capacity":4,"availableDateModel":null},"availableDateModel":{"checkIn":"2021-04-20T00:00:00","checkOut":"2021-04-23T00:00:00"}},{"clientModel":{"passport":"CO0088","name":"Pawlo","lastName":"Arias","email":"p@gmail.com","cellPhoneNumber":"320459444"},"roomModel":{"roomNumber":610,"priceNight":800.00,"availability":true,"capacity":5,"availableDateModel":null},"availableDateModel":{"checkIn":"2021-04-16T00:00:00","checkOut":"2021-04-18T00:00:00"}}]
+[
+  {
+    "clientModel": {
+      "passport": "FR333333",
+      "name": "Mathieu",
+      "lastName": "David",
+      "email": "Mathieu@hotmail.com",
+      "cellPhoneNumber": "222222222222222222"
+    },
+    "roomModel": {
+      "roomNumber": 304,
+      "priceNight": 450.00,
+      "availability": true,
+      "capacity": 2,
+      "availableDateModel": null
+    },
+    "availableDateModel": {
+      "checkIn": "2021-04-27T00:00:00",
+      "checkOut": "2021-04-30T00:00:00"
+    },
+    "bookingNumberModel": 65859
+  }
+]

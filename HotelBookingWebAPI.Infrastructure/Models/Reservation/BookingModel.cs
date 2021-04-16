@@ -9,5 +9,6 @@ namespace HotelBookingWebAPI.Infrastructure.Models.Reservation
         public ClientModel ClientModel { get; set; }
         public RoomModel RoomModel { get; set; }
         public AvailableDateModel availableDateModel { get; set; }
+        public int BookingNumberModel { get; set; }
     }
 }

@@ -10,5 +10,6 @@ namespace HotelBookingWebAPI.DTOs.Reservation
         public ClientResponse ClientResponse { get; set; }
         public RoomResponse RoomResponse { get; set; }
         public AvailableDateResponse availableDateResponse { get; set; }
+        public int BookingNumber { get; set; }
     }
 }
