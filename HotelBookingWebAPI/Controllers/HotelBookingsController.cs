@@ -6,6 +6,9 @@ using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using HotelBookingWebAPI.Application.Commands.Reservation.AddHotelBooking;
+using HotelBookingWebAPI.Application.Commands.Reservation.DeleteBooking;
+using HotelBookingWebAPI.Application.Commands.Reservation.UpDateBooking;
+using HotelBookingWebAPI.Application.Queries.Reservation.GetAllBookings;
 using HotelBookingWebAPI.Application.Queries.Reservation.GetAllRooms;
 using HotelBookingWebAPI.Application.Queries.Reservation.GetAllRoomsAvailability;
 using HotelBookingWebAPI.Application.Queries.Reservation.GetRoomAvailabilityByCapacity;
@@ -111,6 +114,19 @@ namespace HotelBookingWebAPI.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex);
             }
         }
+        [HttpGet("getAllBookings")]
+        public async Task<IActionResult> GetAllBookings()
+        {
+            try
+            {
+                var result = _mediator.Send(new GetAllBookings());
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
 
         [HttpPost("addHotelBooking")]
         public async Task<IActionResult> AddHotelBooking(BookingRequest bookingRequest)
@@ -119,6 +135,35 @@ namespace HotelBookingWebAPI.Controllers
             {
                 var booking = _mapper.Map<Booking>(bookingRequest);
                 var result = await _mediator.Send(new AddHotelBooking(booking));
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        [HttpPut("upDateBooking/{bookingNumber}")]
+        public async Task<IActionResult> UpDateBooking(BookingRequest bookingUpDate, int bookingNumber)
+        {
+            try
+            {
+                var bookingUpDateRequest = _mapper.Map<Booking>(bookingUpDate);
+                var result = await _mediator.Send(new UpDateBooking(bookingUpDateRequest, bookingNumber));
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        [HttpDelete("deleteBooking/{bookingNumber}")]
+        public async Task<IActionResult> DeleteBooking(int bookingNumber)
+        {
+            try
+            {
+                var result = await _mediator.Send(new DeleteBooking(bookingNumber));
                 return Ok(result);
             }
             catch (Exception ex)

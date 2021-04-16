@@ -22,18 +22,29 @@ namespace HotelBookingWebAPI.Application.Commands.Reservation.AddHotelBooking
         public async Task<Booking> Handle(AddHotelBooking request, CancellationToken cancellationToken)
         {
             var allRooms = await _reservationRepository.GetAllRooms();
-            if (CheckAvailability(allRooms, request.Booking))
+            var addBooking = new Booking();
+            if (allRooms.Any(x => x.Availability == true && x.Capacity == request.Booking.Room.Capacity &&
+                                                     x.PriceNight == request.Booking.Room.PriceNight))
             {
-                var addBooking = await _reservationRepository.AddBooking();
+                var booking = CheckAvailability(allRooms, request.Booking);
+                addBooking = await _reservationRepository.AddBooking(booking);
             }
-            return null;
+            return addBooking;
         }
 
-        public bool CheckAvailability(IEnumerable<Room> allRooms, Booking booking)
+        public Booking CheckAvailability(IEnumerable<Room> allRooms, Booking booking)
         {
+            var bookingRequired = new Booking();
             var bookingRequest = allRooms.Where(x => x.Availability == true && x.Capacity == booking.Room.Capacity && 
                                                      x.PriceNight == booking.Room.PriceNight);
-            return true;
+            foreach (var item in bookingRequest)
+            {
+                bookingRequired.Client = booking.Client;
+                bookingRequired.availableDate = booking.availableDate;
+                bookingRequired.Room = item;
+                bookingRequired.BookingNumber = new Random().Next(10000, 100000);
+            }
+            return bookingRequired;
         }
     }
 }

@@ -1,106 +1,86 @@
 [
-	{
-		"RoomModel": {
-			"RoomNumber": 101,
-			"PriceNight": 500.99,
-			"Availability": true,
-			"Capacity": 4
-		},
-		"AvailableDate": [
-			{
-				"CheckIn": "04/20/2021",
-				"CheckOut": "04/23/2021"
-			},
-			{
-				"CheckIn": "04/25/2021",
-				"CheckOut": "04/27/2021"
-			},
-			{
-				"CheckIn": "04/29/2021",
-				"CheckOut": "05/01/2021"
-			}
-		]
-	},
-	{
-		"RoomModel": {
-			"RoomNumber": 202,
-			"PriceNight": 1000.50,
-			"Availability": false,
-			"Capacity": 2
-		},
-		"AvailableDate": [
-			{
-				"CheckIn": "04/17/2021",
-				"CheckOut": "04/19/2021"
-			},
-			{
-				"CheckIn": "04/20/2021",
-				"CheckOut": "04/23/2021"
-			},
-			{
-				"CheckIn": "04/20/2021",
-				"CheckOut": "04/23/2021"
-			},
-			{
-				"CheckIn": "04/28/2021",
-				"CheckOut": "04/30/2021"
-			},
-			{
-				"CheckIn": "05/01/2021",
-				"CheckOut": "05/03/2021"
-			}
-		]
-	},
-	{
-		"RoomModel": {
-			"RoomNumber": 610,
-			"PriceNight": 800.00,
-			"Availability": true,
-			"Capacity": 5
-		},
-		"AvailableDate": [
-			{
-				"CheckIn": "04/16/2021",
-				"CheckOut": "04/18/2021"
-			},
-			{
-				"CheckIn": "04/20/2021",
-				"CheckOut": "04/23/2021"
-			}
-		]
-	},
-	{
-		"RoomModel": {
-			"RoomNumber": 304,
-			"PriceNight": 450.99,
-			"Availability": false,
-			"Capacity": 2
-		},
-		"AvailableDate": [
-			{
-				"CheckIn": "04/13/2021",
-				"CheckOut": "04/15/2021"
-			},
-			{
-				"CheckIn": "04/15/2021",
-				"CheckOut": "04/18/2021"
-			},
-			{
-				"CheckIn": "04/19/2021",
-				"CheckOut": "04/21/2021"
-			},
-			{
-				"CheckIn": "04/23/2021",
-				"CheckOut": "04/25/2021"
-			},
-			{
-				"CheckIn": "04/27/2021",
-				"CheckOut": "04/30/2021"
-			},
-			{
-				"CheckIn": "05/01/2021",
-				"CheckOut": "05/03/2021"
-			}
-		]
-	}
+  {
+    "clientModel": {
+      "passport": "FRO0765",
+      "name": "Mathieu",
+      "lastName": "David",
+      "email": "David@gmail.com",
+      "cellPhoneNumber": "65555555555555"
+    },
+    "roomModel": {
+      "roomNumber": 101,
+      "priceNight": 500.00,
+      "availability": true,
+      "capacity": 4,
+      "availableDateModel": null
+    },
+    "availableDateModel": {
+      "checkIn": "2021-04-29T00:00:00",
+      "checkOut": "2021-05-01T00:00:00"
+    },
+    "bookingNumberModel": 38985
+  },
+  {
+    "clientModel": {
+      "passport": "CO0001",
+      "name": "Juan",
+      "lastName": "Sierra",
+      "email": "Juan@hotmail.com",
+      "cellPhoneNumber": "1111111111111111"
+    },
+    "roomModel": {
+      "roomNumber": 107,
+      "priceNight": 1000.00,
+      "availability": false,
+      "capacity": 7,
+      "availableDateModel": null
+    },
+    "availableDateModel": {
+      "checkIn": "2021-04-16T00:00:00",
+      "checkOut": "2021-04-18T00:00:00"
+    },
+    "bookingNumberModel": 91999
+  },
+  {
+    "clientModel": {
+      "passport": "CAN0007",
+      "name": "Laura",
+      "lastName": "Ballesteros",
+      "email": "lauraBallesteros@hotmail.com",
+      "cellPhoneNumber": "41812345"
+    },
+    "roomModel": {
+      "roomNumber": 610,
+      "priceNight": 800.00,
+      "availability": true,
+      "capacity": 5,
+      "availableDateModel": null
+    },
+    "availableDateModel": {
+      "checkIn": "2021-04-20T00:00:00",
+      "checkOut": "2021-04-23T00:00:00"
+    },
+    "bookingNumberModel": 92923
+  },
+  {
+    "clientModel": {
+      "passport": "COL001",
+      "name": "Pawlo",
+      "lastName": "Arias",
+      "email": "pawlo@gmail.com.com",
+      "cellPhoneNumber": "14182629147"
+    },
+    "roomModel": {
+      "roomNumber": 610,
+      "priceNight": 800.00,
+      "availability": true,
+      "capacity": 5,
+      "availableDateModel": null
+    },
+    "availableDateModel": {
+      "checkIn": "2021-04-16T00:00:00",
+      "checkOut": "2021-04-18T00:00:00"
+    },
+    "bookingNumberModel": 37193
+  }
 ]
