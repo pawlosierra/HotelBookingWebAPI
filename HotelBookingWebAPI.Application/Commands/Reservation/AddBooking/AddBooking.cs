@@ -4,9 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HotelBookingWebAPI.Application.Queries.Reservation.GetAllBookings
+namespace HotelBookingWebAPI.Application.Commands.Reservation.AddBooking
 {
-    public class GetAllBookings : IRequest<IEnumerable<Booking>>
+    public class AddBooking : IRequest<Booking>
     {
+        
     }
 }

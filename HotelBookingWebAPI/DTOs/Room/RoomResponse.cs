@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HotelBookingWebAPI.DTOs.Reservation
+namespace HotelBookingWebAPI.DTOs.Room
 {
     public class RoomResponse
     {

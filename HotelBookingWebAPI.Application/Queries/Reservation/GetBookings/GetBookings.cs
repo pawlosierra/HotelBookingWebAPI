@@ -4,10 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HotelBookingWebAPI.Application.Commands.Reservation.DeleteBooking
+namespace HotelBookingWebAPI.Application.Queries.Reservation.GetBookings
 {
-    public class DeleteBooking : IRequest<IEnumerable<Booking>>
+    public class GetBookings : IRequest<IEnumerable<Booking>>
     {
-
     }
 }

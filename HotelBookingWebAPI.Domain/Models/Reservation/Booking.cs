@@ -6,10 +6,9 @@ namespace HotelBookingWebAPI.Domain.Models.Reservation
 {
     public class Booking
     {
-        //public Booking()
-        //{
-        //    BookingNumber = new Random().Next(10000, 100000);
-        //}
+        public DateTime CheckIn { get; set; }
+        public DateTime CheckOut { get; set; }
+        public int Travellers { get; set; }
         public Client Client { get; set; }
         public Room Room { get; set; }
         public AvailableDate availableDate { get; set; }
