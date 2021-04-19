@@ -8,6 +8,7 @@ namespace HotelBookingWebAPI.Domain.Repositories
 {
     public interface IRoomRepository
     {
-        Task<IEnumerable<Room>> GetAllRooms();
+        Task<IEnumerable<Room>> GetRooms();
+        Task UpdateRooms(IEnumerable<Room> updateRooms);
     }
 }

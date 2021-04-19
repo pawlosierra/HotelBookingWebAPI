@@ -1,4 +1,5 @@
 ﻿using HotelBookingWebAPI.Infrastructure.Models.Reservation;
+using HotelBookingWebAPI.Infrastructure.Models.Room;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
@@ -18,6 +19,11 @@ namespace HotelBookingWebAPI.Infrastructure.Data
             var jsonFile = File.ReadAllText(_path);
             List<RoomModel> rooms = JsonConvert.DeserializeObject<List<RoomModel>>(jsonFile);
             return rooms;
+        }
+        public void SerializeRooms(IEnumerable<RoomModel> roomModels)
+        {
+            string roomModelsJson = JsonConvert.SerializeObject(roomModels, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
+            File.WriteAllText(_path, roomModelsJson);
         }
 
         public List<BookingModel> DeserializeBookingModel()

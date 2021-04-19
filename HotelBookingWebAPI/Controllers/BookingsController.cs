@@ -2,7 +2,7 @@
 using HotelBookingWebAPI.Application.Commands.Reservation.AddBooking;
 using HotelBookingWebAPI.Application.Commands.Reservation.DeleteBooking;
 using HotelBookingWebAPI.Application.Commands.Reservation.UpdateBooking;
-using HotelBookingWebAPI.Application.Queries.Reservation.GetBookings;
+using HotelBookingWebAPI.Application.Queries.Reservations.GetBookings;
 using HotelBookingWebAPI.Domain.Models.Reservation;
 using HotelBookingWebAPI.DTOs.Reservation;
 using MediatR;
@@ -46,7 +46,7 @@ namespace HotelBookingWebAPI.Controllers
             try
             {
                 var booking = _mapper.Map<Booking>(bookingRequest);
-                var result = await _mediator.Send(new AddBooking());
+                var result = await _mediator.Send(new AddBooking(booking));
                 return Ok(result);
             }
             catch (Exception ex)

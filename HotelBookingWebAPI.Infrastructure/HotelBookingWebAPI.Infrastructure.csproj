@@ -13,8 +13,4 @@
     <ProjectReference Include="..\HotelBookingWebAPI.Domain\HotelBookingWebAPI.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Room\" />
-  </ItemGroup>
-
 </Project>

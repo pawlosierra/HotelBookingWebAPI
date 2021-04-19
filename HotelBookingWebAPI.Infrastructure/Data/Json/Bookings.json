@@ -1,86 +1,30 @@
 [
   {
-    "clientModel": {
-      "passport": "FRO0765",
+    "checkIn": "2021-04-24T00:00:00",
+    "checkOut": "2021-04-26T00:00:00",
+    "bookingNumber": 71259,
+    "travellers": 4,
+    "client": {
+      "passport": "FRO076",
       "name": "Mathieu",
       "lastName": "David",
       "email": "David@gmail.com",
-      "cellPhoneNumber": "65555555555555"
+      "cellPhoneNumber": "65555555555"
     },
-    "roomModel": {
-      "roomNumber": 101,
-      "priceNight": 500.00,
+    "room": {
+      "priceNight": 750.0,
+      "roomNumber": 202,
+      "roomArea": 807,
+      "peoplePerRoom": 4,
+      "numberOfBeds": 2,
       "availability": true,
-      "capacity": 4,
-      "availableDateModel": null
-    },
-    "availableDateModel": {
-      "checkIn": "2021-04-29T00:00:00",
-      "checkOut": "2021-05-01T00:00:00"
-    },
-    "bookingNumberModel": 38985
-  },
-  {
-    "clientModel": {
-      "passport": "CO0001",
-      "name": "Juan",
-      "lastName": "Sierra",
-      "email": "Juan@hotmail.com",
-      "cellPhoneNumber": "1111111111111111"
-    },
-    "roomModel": {
-      "roomNumber": 107,
-      "priceNight": 1000.00,
-      "availability": false,
-      "capacity": 7,
-      "availableDateModel": null
-    },
-    "availableDateModel": {
-      "checkIn": "2021-04-16T00:00:00",
-      "checkOut": "2021-04-18T00:00:00"
-    },
-    "bookingNumberModel": 91999
-  },
-  {
-    "clientModel": {
-      "passport": "CAN0007",
-      "name": "Laura",
-      "lastName": "Ballesteros",
-      "email": "lauraBallesteros@hotmail.com",
-      "cellPhoneNumber": "41812345"
-    },
-    "roomModel": {
-      "roomNumber": 610,
-      "priceNight": 800.00,
-      "availability": true,
-      "capacity": 5,
-      "availableDateModel": null
-    },
-    "availableDateModel": {
-      "checkIn": "2021-04-20T00:00:00",
-      "checkOut": "2021-04-23T00:00:00"
-    },
-    "bookingNumberModel": 92923
-  },
-  {
-    "clientModel": {
-      "passport": "COL001",
-      "name": "Pawlo",
-      "lastName": "Arias",
-      "email": "pawlo@gmail.com.com",
-      "cellPhoneNumber": "14182629147"
-    },
-    "roomModel": {
-      "roomNumber": 610,
-      "priceNight": 800.00,
-      "availability": true,
-      "capacity": 5,
-      "availableDateModel": null
-    },
-    "availableDateModel": {
-      "checkIn": "2021-04-16T00:00:00",
-      "checkOut": "2021-04-18T00:00:00"
-    },
-    "bookingNumberModel": 37193
+      "oceanView": true,
+      "freeWiFi": true,
+      "airConditioning": true,
+      "petFriendly": true,
+      "parkingIncluded": true,
+      "availableDates": [
+      ]
+    }
   }
 ]

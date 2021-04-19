@@ -15,7 +15,7 @@ namespace HotelBookingWebAPI.DTOs.Reservation
         public string CheckOut { get; set; }
         [Range(1, 7, ErrorMessage = "The value for {0} must be between {1} and {2}")]
         public int Travellers { get; set; }
-        public ClientRequest ClientRequest { get; set; }
-        public RoomRequest RoomRequest { get; set; }
+        public ClientRequest Client { get; set; }
+        public RoomRequest Room { get; set; }
     }
 }

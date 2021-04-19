@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HotelBookingWebAPI.Application.Queries.Reservation.GetBookings
+namespace HotelBookingWebAPI.Application.Queries.Reservations.GetBookings
 {
     public class GetBookingsHandler : IRequestHandler<GetBookings, IEnumerable<Booking>>
     {
@@ -20,7 +20,8 @@ namespace HotelBookingWebAPI.Application.Queries.Reservation.GetBookings
 
         public async Task<IEnumerable<Booking>> Handle(GetBookings request, CancellationToken cancellationToken)
         {
-            return null;
+            return await _reservationRepository.GetBookings();
         }
+
     }
 }

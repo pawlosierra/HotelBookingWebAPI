@@ -1,12 +1,11 @@
-﻿using HotelBookingWebAPI.DTOs.Reservation;
+﻿using HotelBookingWebAPI.Infrastructure.Models.Reservation;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace HotelBookingWebAPI.DTOs.Room
+namespace HotelBookingWebAPI.Infrastructure.Models.Room
 {
-    public class RoomResponse
+    public class RoomModel
     {
         public decimal PriceNight { get; set; }
         public int RoomNumber { get; set; }
@@ -19,6 +18,6 @@ namespace HotelBookingWebAPI.DTOs.Room
         public bool AirConditioning { get; set; }
         public bool PetFriendly { get; set; }
         public bool ParkingIncluded { get; set; }
-        //public AvailableDateResponse AvailableDate { get; set; }
+        public List<AvailableDateModel> AvailableDates { get; set; }
     }
 }

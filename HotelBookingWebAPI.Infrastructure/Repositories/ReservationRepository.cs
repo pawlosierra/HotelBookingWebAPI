@@ -13,26 +13,30 @@ namespace HotelBookingWebAPI.Infrastructure.Repositories
     public class ReservationRepository : IReservationRepository
     {
         private readonly IMapper _mapper;
-        private readonly HotelContext _roomContext;
+        private readonly HotelContext _hotelContext;
 
         public ReservationRepository(IMapper mapper)
         {
             _mapper = mapper;
-            _roomContext = new HotelContext();
+            _hotelContext = new HotelContext();
         }
-        public async Task<IEnumerable<Booking>> GetAllBookings()
+        public async Task<IEnumerable<Booking>> GetBookings()
         {
-            return null;
+            var bookings = _hotelContext.DeserializeBookingModel();
+            var resp = _mapper.Map<IEnumerable<Booking>>(bookings);
+            return resp;
         }
         public async Task<Booking> AddBooking(Booking booking)
         {
-            return null;
+            var bookingModel = _mapper.Map<BookingModel>(booking);
+            _hotelContext.SerializeBooking(bookingModel);
+            return booking;
         }
-        public async Task<IEnumerable<Booking>> UpDateBooking(IEnumerable<Booking> upDateBooking)
+        public async Task<IEnumerable<Booking>> UpdateBooking(IEnumerable<Booking> updateBooking)
         {
             return null;
         }
-        public async Task<IEnumerable<Booking>> DeleteBooking(IEnumerable<Booking> upDateBooking)
+        public async Task<IEnumerable<Booking>> DeleteBooking(IEnumerable<Booking> updateBooking)
         {
             return null;
         }

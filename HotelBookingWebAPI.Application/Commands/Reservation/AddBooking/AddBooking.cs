@@ -8,6 +8,11 @@ namespace HotelBookingWebAPI.Application.Commands.Reservation.AddBooking
 {
     public class AddBooking : IRequest<Booking>
     {
-        
+        public AddBooking(Booking booking)
+        {
+            Booking = booking;
+        }
+
+        public Booking Booking { get; set; }
     }
 }

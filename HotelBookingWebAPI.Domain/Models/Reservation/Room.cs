@@ -18,6 +18,6 @@ namespace HotelBookingWebAPI.Domain.Models.Reservation
         public bool AirConditioning { get; set; }
         public bool PetFriendly { get; set; }
         public bool ParkingIncluded { get; set; }
-        public List<AvailableDate> AvailableDate { get; set; }
+        public List<AvailableDate> AvailableDates { get; set; }
     }
 }

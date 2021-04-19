@@ -12,7 +12,7 @@ namespace HotelBookingWebAPI.DTOs.Room
         [Range(450, 1000, ErrorMessage = "The PriceNight for {0} must be between {1} and {2}")]
         public decimal PriceNight { get; set; }
         [Required(ErrorMessage = "The field RoomArea is required")]
-        [Range(850, 2745, ErrorMessage = "The RoomArea for {0} must be between {1} and {2} sq ft.")]
+        [Range(807, 2745, ErrorMessage = "The RoomArea for {0} must be between {1} and {2} sq ft.")]
         public int RoomArea { get; set; }
         [Required(ErrorMessage = "The field PeoplePerRoom is required")]
         [Range(1, 7, ErrorMessage = "The PeoplePerRoom for {0} must be between {1} and {2}")]

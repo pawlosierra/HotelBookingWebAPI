@@ -11,16 +11,16 @@ namespace HotelBookingWebAPI.Application.Queries.Reservation.GetRooms
 {
     public class GetRoomsHandler : IRequestHandler<GetRooms, IEnumerable<Room>>
     {
-        private readonly IReservationRepository _reservationRepository;
+        private readonly IRoomRepository _roomRepository;
 
-        public GetRoomsHandler(IReservationRepository reservationRepository)
+        public GetRoomsHandler(IRoomRepository roomRepository)
         {
-            _reservationRepository = reservationRepository;
+            _roomRepository = roomRepository;
         }
 
         public async Task<IEnumerable<Room>> Handle(GetRooms request, CancellationToken cancellationToken)
         {
-            return null;
+            return await _roomRepository.GetRooms();
         }
     }
 }
