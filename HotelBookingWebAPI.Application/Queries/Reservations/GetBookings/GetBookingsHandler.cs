@@ -7,20 +7,21 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HotelBookingWebAPI.Application.Queries.Reservation.GetAllRooms
+namespace HotelBookingWebAPI.Application.Queries.Reservations.GetBookings
 {
-    public class GetAllRoomsHandler : IRequestHandler<GetAllRooms, IEnumerable<Room>>
+    public class GetBookingsHandler : IRequestHandler<GetBookings, IEnumerable<Booking>>
     {
         private readonly IReservationRepository _reservationRepository;
 
-        public GetAllRoomsHandler(IReservationRepository reservationRepository)
+        public GetBookingsHandler(IReservationRepository reservationRepository)
         {
             _reservationRepository = reservationRepository;
         }
 
-        public async Task<IEnumerable<Room>> Handle(GetAllRooms request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Booking>> Handle(GetBookings request, CancellationToken cancellationToken)
         {
-            return await _reservationRepository.GetAllRooms();
+            return await _reservationRepository.GetBookings();
         }
+
     }
 }

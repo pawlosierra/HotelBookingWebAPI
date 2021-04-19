@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HotelBookingWebAPI.Application.Queries.Reservation.GetAllRooms
+namespace HotelBookingWebAPI.Application.Queries.Reservation.GetRooms
 {
-    public class GetAllRooms : IRequest<IEnumerable<Room>>
+    public class GetRooms : IRequest<IEnumerable<Room>>
     {
     }
 }

@@ -1,106 +1,168 @@
 [
   {
-    "RoomModel": {
-      "RoomNumber": 101,
-      "PriceNight": 500.99,
-      "Availability": true,
-      "Capacity": 4,
-      "AvailableDateModel": [
-        {
-          "CheckIn": "04/20/2021",
-          "CheckOut": "04/23/2021"
-        },
-        {
-          "CheckIn": "04/25/2021",
-          "CheckOut": "04/27/2021"
-        },
-        {
-          "CheckIn": "04/29/2021",
-          "CheckOut": "05/01/2021"
-        }
-      ]
-    }
+    "PriceNight": 657,
+    "RoomNumber": 101,
+    "RoomArea": 850,
+    "PeoplePerRoom": 4,
+    "NumberOfBeds": 1,
+    "Availability": true,
+    "OceanView": true,
+    "FreeWiFi": true,
+    "AirConditioning": true,
+    "PetFriendly": true,
+    "ParkingIncluded": true,
+    "AvailableDates": [
+      {
+        "CheckIn": "04/20/2021",
+        "CheckOut": "04/23/2021"
+      },
+      {
+        "CheckIn": "04/25/2021",
+        "CheckOut": "04/27/2021"
+      },
+      {
+        "CheckIn": "04/29/2021",
+        "CheckOut": "05/01/2021"
+      }
+    ]
   },
   {
-    "RoomModel": {
-      "RoomNumber": 202,
-      "PriceNight": 1000.50,
-      "Availability": false,
-      "Capacity": 2,
-      "AvailableDateModel": [
-        {
-          "CheckIn": "04/17/2021",
-          "CheckOut": "04/19/2021"
-        },
-        {
-          "CheckIn": "04/20/2021",
-          "CheckOut": "04/23/2021"
-        },
-        {
-          "CheckIn": "04/20/2021",
-          "CheckOut": "04/23/2021"
-        },
-        {
-          "CheckIn": "04/28/2021",
-          "CheckOut": "04/30/2021"
-        },
-        {
-          "CheckIn": "05/01/2021",
-          "CheckOut": "05/03/2021"
-        }
-      ]
-    }
+    "PriceNight": 750,
+    "RoomNumber": 202,
+    "RoomArea": 807,
+    "PeoplePerRoom": 4,
+    "NumberOfBeds": 2,
+    "Availability": true,
+    "OceanView": true,
+    "FreeWiFi": true,
+    "AirConditioning": true,
+    "PetFriendly": true,
+    "ParkingIncluded": true,
+    "AvailableDates": [
+      {
+        "CheckIn": "04/17/2021",
+        "CheckOut": "04/19/2021"
+      },
+      {
+        "CheckIn": "04/20/2021",
+        "CheckOut": "04/23/2021"
+      },
+      {
+        "CheckIn": "04/24/2021",
+        "CheckOut": "04/26/2021"
+      },
+      {
+        "CheckIn": "04/28/2021",
+        "CheckOut": "04/30/2021"
+      },
+      {
+        "CheckIn": "05/01/2021",
+        "CheckOut": "05/03/2021"
+      }
+    ]
   },
   {
-    "RoomModel": {
-      "RoomNumber": 610,
-      "PriceNight": 800.00,
-      "Availability": true,
-      "Capacity": 5,
-      "AvailableDateModel": [
-        {
-          "CheckIn": "04/16/2021",
-          "CheckOut": "04/18/2021"
-        },
-        {
-          "CheckIn": "04/20/2021",
-          "CheckOut": "04/23/2021"
-        }
-      ]
-    }
+    "PriceNight": 798,
+    "RoomNumber": 610,
+    "RoomArea": 1270,
+    "PeoplePerRoom": 3,
+    "NumberOfBeds": 1,
+    "Availability": true,
+    "OceanView": false,
+    "FreeWiFi": true,
+    "AirConditioning": true,
+    "PetFriendly": true,
+    "ParkingIncluded": true,
+    "AvailableDates": [
+      {
+        "CheckIn": "04/16/2021",
+        "CheckOut": "04/18/2021"
+      },
+      {
+        "CheckIn": "04/20/2021",
+        "CheckOut": "04/23/2021"
+      }
+    ]
   },
   {
-    "RoomModel": {
-      "RoomNumber": 304,
-      "PriceNight": 450.99,
-      "Availability": false,
-      "Capacity": 2,
-      "AvailableDateModel": [
-        {
-          "CheckIn": "04/13/2021",
-          "CheckOut": "04/15/2021"
-        },
-        {
-          "CheckIn": "04/15/2021",
-          "CheckOut": "04/18/2021"
-        },
-        {
-          "CheckIn": "04/19/2021",
-          "CheckOut": "04/21/2021"
-        },
-        {
-          "CheckIn": "04/23/2021",
-          "CheckOut": "04/25/2021"
-        },
-        {
-          "CheckIn": "04/27/2021",
-          "CheckOut": "04/30/2021"
-        },
-        {
-          "CheckIn": "05/01/2021",
-          "CheckOut": "05/03/2021"
-        }
-      ]
-    }
+    "PriceNight": 1051,
+    "RoomNumber": 304,
+    "RoomArea": 970,
+    "PeoplePerRoom": 2,
+    "NumberOfBeds": 1,
+    "Availability": true,
+    "OceanView": true,
+    "FreeWiFi": true,
+    "AirConditioning": true,
+    "PetFriendly": true,
+    "ParkingIncluded": true,
+    "AvailableDates": [
+      {
+        "CheckIn": "04/13/2021",
+        "CheckOut": "04/15/2021"
+      },
+      {
+        "CheckIn": "04/15/2021",
+        "CheckOut": "04/18/2021"
+      },
+      {
+        "CheckIn": "04/19/2021",
+        "CheckOut": "04/21/2021"
+      },
+      {
+        "CheckIn": "04/23/2021",
+        "CheckOut": "04/25/2021"
+      },
+      {
+        "CheckIn": "04/27/2021",
+        "CheckOut": "04/30/2021"
+      },
+      {
+        "CheckIn": "05/01/2021",
+        "CheckOut": "05/03/2021"
+      }
+    ]
+  },
+  {
+    "PriceNight": 1173,
+    "RoomNumber": 107,
+    "RoomArea": 2433,
+    "PeoplePerRoom": 3,
+    "NumberOfBeds": 1,
+    "Availability": false,
+    "OceanView": true,
+    "FreeWiFi": true,
+    "AirConditioning": true,
+    "PetFriendly": true,
+    "ParkingIncluded": true,
+    "AvailableDates": [
+      {
+        "CheckIn": "04/16/2021",
+        "CheckOut": "04/18/2021"
+      }
+    ]
+  },
+  {
+    "PriceNight": 1267,
+    "RoomNumber": 210,
+    "RoomArea": 1292,
+    "PeoplePerRoom": 4,
+    "NumberOfBeds": 1,
+    "Availability": true,
+    "OceanView": true,
+    "FreeWiFi": true,
+    "AirConditioning": true,
+    "PetFriendly": true,
+    "ParkingIncluded": true,
+    "AvailableDates": [
+      {
+        "CheckIn": "04/16/2021",
+        "CheckOut": "04/18/2021"
+      },
+      {
+        "CheckIn": "04/18/2021",
+        "CheckOut": "04/20/2021"
+      }
+    ]
   }
 ]

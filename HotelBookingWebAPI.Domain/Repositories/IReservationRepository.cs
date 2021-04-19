@@ -8,10 +8,9 @@ namespace HotelBookingWebAPI.Domain.Repositories
 {
     public interface IReservationRepository
     {
-        Task<IEnumerable<Room>> GetAllRooms();
-        Task<IEnumerable<Booking>> GetAllBookings();
+        Task<IEnumerable<Booking>> GetBookings();
         Task<Booking> AddBooking(Booking booking);
-        Task<IEnumerable<Booking>> UpDateBooking(IEnumerable<Booking> upDateBooking);
-        Task<IEnumerable<Booking>> DeleteBooking(IEnumerable<Booking>upDateBooking);
+        Task<IEnumerable<Booking>> UpdateBooking(IEnumerable<Booking> updateBooking);
+        Task<IEnumerable<Booking>> DeleteBooking(IEnumerable<Booking>updateBooking);
     }
 }

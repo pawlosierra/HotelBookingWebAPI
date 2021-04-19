@@ -4,11 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HotelBookingWebAPI.Application.Commands.Reservation.AddHotelBooking
+namespace HotelBookingWebAPI.Application.Commands.Reservation.AddBooking
 {
-    public class AddHotelBooking : IRequest<Booking>
+    public class AddBooking : IRequest<Booking>
     {
-        public AddHotelBooking(Booking booking)
+        public AddBooking(Booking booking)
         {
             Booking = booking;
         }
