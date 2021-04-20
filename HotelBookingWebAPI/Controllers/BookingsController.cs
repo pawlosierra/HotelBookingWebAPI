@@ -8,6 +8,7 @@ using HotelBookingWebAPI.DTOs.Reservation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -55,13 +56,17 @@ namespace HotelBookingWebAPI.Controllers
             }
         }
 
-        [HttpPut("{bookingNumber}")]
-        public async Task<IActionResult> Update(BookingRequest bookingUpDate, int bookingNumber)
+        [HttpPut]
+        public async Task<IActionResult> Update(BookingRequest bookingUpDate, 
+                                                [FromQuery(Name = "bookingNumber")]
+                                                [Required(ErrorMessage = "The field bookingNumber is required")]
+                                                [Range(10000, 100000, ErrorMessage = "The value for {0} must be between {1} and {2}")]
+                                                int bookingNumber)
         {
             try
             {
-                var bookingUpDateRequest = _mapper.Map<Booking>(bookingUpDate);
-                var result = await _mediator.Send(new UpdateBooking());
+                var bookingUpdateRequest = _mapper.Map<Booking>(bookingUpDate);
+                var result = await _mediator.Send(new UpdateBooking(bookingUpdateRequest, bookingNumber));
                 return Ok(result);
             }
             catch (Exception ex)
@@ -70,12 +75,15 @@ namespace HotelBookingWebAPI.Controllers
             }
         }
 
-        [HttpDelete("{bookingNumber}")]
-        public async Task<IActionResult> Delete(int bookingNumber)
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromQuery(Name = "bookingNumber")]
+                                                [Required(ErrorMessage = "The field bookingNumber is required")]
+                                                [Range(10000, 100000, ErrorMessage = "The value for {0} must be between {1} and {2}")]
+                                                int bookingNumber)
         {
             try
             {
-                var result = await _mediator.Send(new DeleteBooking());
+                var result = await _mediator.Send(new DeleteBooking(bookingNumber));
                 return Ok(result);
             }
             catch (Exception ex)

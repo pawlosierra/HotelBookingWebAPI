@@ -8,6 +8,13 @@ namespace HotelBookingWebAPI.Application.Commands.Reservation.UpdateBooking
 {
     public class UpdateBooking : IRequest<IEnumerable<Booking>> 
     {
-        
+        public UpdateBooking(Booking booking, int bookingNumber)
+        {
+            Booking = booking;
+            BookingNumber = bookingNumber;
+        }
+
+        public Booking Booking { get; set; }
+        public int BookingNumber { get; set; }
     }
 }
