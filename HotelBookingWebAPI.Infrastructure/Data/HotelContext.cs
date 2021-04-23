@@ -1,4 +1,5 @@
-﻿using HotelBookingWebAPI.Infrastructure.Models.Reservation;
+﻿using HotelBookingWebAPI.Infrastructure.Models.Client;
+using HotelBookingWebAPI.Infrastructure.Models.Reservation;
 using HotelBookingWebAPI.Infrastructure.Models.Room;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -14,6 +15,21 @@ namespace HotelBookingWebAPI.Infrastructure.Data
     {
         private readonly string _path = @"C:\Users\JuanPawloSierra\source\repos\Projects\HotelBookingWebAPI\HotelBookingWebAPI.Infrastructure\Data\Json\Rooms.json";
         private readonly string _dest = @"C:\Users\JuanPawloSierra\source\repos\Projects\HotelBookingWebAPI\HotelBookingWebAPI.Infrastructure\Data\Json\Bookings.json";
+        private readonly string _client = @"C:\Users\JuanPawloSierra\source\repos\Projects\HotelBookingWebAPI\HotelBookingWebAPI.Infrastructure\Data\Json\Clients.json";
+
+        public List<ClientModel> DeserializeClientModel()
+        {
+            var jsonFile = File.ReadAllText(_client);
+            List<ClientModel> clients = JsonConvert.DeserializeObject<List<ClientModel>>(jsonFile);
+            return clients;
+        }
+        public void serializeClientModel(ClientModel clientModel)
+        {
+            var clients = DeserializeClientModel();
+            clients.Add(clientModel);
+            string clientModelJson = JsonConvert.SerializeObject(clients, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
+            File.WriteAllText(_client, clientModelJson);
+        }
         public List<RoomModel> DeserializeRoomModel()
         {
             var jsonFile = File.ReadAllText(_path);

@@ -3,6 +3,7 @@ using HotelBookingWebAPI.Domain.Repositories;
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,7 +21,8 @@ namespace HotelBookingWebAPI.Application.Queries.Reservations.GetBookings
 
         public async Task<IEnumerable<Booking>> Handle(GetBookings request, CancellationToken cancellationToken)
         {
-            return await _reservationRepository.GetBookings();
+            var bookings = await _reservationRepository.GetBookings();
+            return bookings;
         }
 
     }

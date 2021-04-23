@@ -6,7 +6,7 @@ using System.Text;
 
 namespace HotelBookingWebAPI.Application.Commands.Reservation.UpdateBooking
 {
-    public class UpdateBooking : IRequest<IEnumerable<Booking>> 
+    public class UpdateBooking : IRequest<BookingValidation> 
     {
         public UpdateBooking(Booking booking, int bookingNumber)
         {

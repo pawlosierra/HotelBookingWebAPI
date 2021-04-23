@@ -6,7 +6,7 @@ using System.Text;
 
 namespace HotelBookingWebAPI.Application.Commands.Reservation.AddBooking
 {
-    public class AddBooking : IRequest<Booking>
+    public class AddBooking : IRequest<BookingValidation>
     {
         public AddBooking(Booking booking)
         {

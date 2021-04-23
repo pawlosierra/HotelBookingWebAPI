@@ -8,8 +8,9 @@ namespace HotelBookingWebAPI.DTOs.Room
 {
     public class RoomResponse
     {
-        public decimal PriceNight { get; set; }
+        public int RoomId { get; set; }
         public int RoomNumber { get; set; }
+        public decimal PriceNight { get; set; }
         public int RoomArea { get; set; }
         public int PeoplePerRoom { get; set; }
         public int NumberOfBeds { get; set; }
@@ -19,6 +20,5 @@ namespace HotelBookingWebAPI.DTOs.Room
         public bool AirConditioning { get; set; }
         public bool PetFriendly { get; set; }
         public bool ParkingIncluded { get; set; }
-        //public AvailableDateResponse AvailableDate { get; set; }
     }
 }

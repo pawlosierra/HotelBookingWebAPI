@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace HotelBookingWebAPI.Infrastructure.Models.Reservation
+namespace HotelBookingWebAPI.DTOs.Client
 {
-    public class ClientModel
+    public class ClientResponse
     {
+        public int ClientId { get; set; }
         public string Passport { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }

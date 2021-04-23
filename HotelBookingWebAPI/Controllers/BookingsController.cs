@@ -8,6 +8,7 @@ using HotelBookingWebAPI.DTOs.Reservation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Threading.Tasks;
@@ -32,7 +33,8 @@ namespace HotelBookingWebAPI.Controllers
         {
             try
             {
-                var result = await _mediator.Send(new GetBookings());
+                var bookings = await _mediator.Send(new GetBookings());
+                var result = _mapper.Map<IEnumerable<BookingResponse>>(bookings);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -47,7 +49,8 @@ namespace HotelBookingWebAPI.Controllers
             try
             {
                 var booking = _mapper.Map<Booking>(bookingRequest);
-                var result = await _mediator.Send(new AddBooking(booking));
+                var bookingValidation = await _mediator.Send(new AddBooking(booking));
+                var result = _mapper.Map<BookingValidatioResponse>(bookingValidation);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -57,7 +60,7 @@ namespace HotelBookingWebAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(BookingRequest bookingUpDate, 
+        public async Task<IActionResult> Update(BookingRequest bookingUpDate,
                                                 [FromQuery(Name = "bookingNumber")]
                                                 [Required(ErrorMessage = "The field bookingNumber is required")]
                                                 [Range(10000, 100000, ErrorMessage = "The value for {0} must be between {1} and {2}")]
@@ -66,7 +69,8 @@ namespace HotelBookingWebAPI.Controllers
             try
             {
                 var bookingUpdateRequest = _mapper.Map<Booking>(bookingUpDate);
-                var result = await _mediator.Send(new UpdateBooking(bookingUpdateRequest, bookingNumber));
+                var bookingValidation = await _mediator.Send(new UpdateBooking(bookingUpdateRequest, bookingNumber));
+                var result = _mapper.Map<BookingValidatioResponse>(bookingValidation);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -83,7 +87,8 @@ namespace HotelBookingWebAPI.Controllers
         {
             try
             {
-                var result = await _mediator.Send(new DeleteBooking(bookingNumber));
+                var booking = await _mediator.Send(new DeleteBooking(bookingNumber));
+                var result = _mapper.Map<BookingValidatioResponse>(booking);
                 return Ok(result);
             }
             catch (Exception ex)

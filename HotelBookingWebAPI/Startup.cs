@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HotelBookingWebAPI.Application.Queries.Reservation.GetRooms;
 using HotelBookingWebAPI.Domain.Repositories;
+using HotelBookingWebAPI.Infrastructure.Mappers;
 using HotelBookingWebAPI.Infrastructure.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -34,6 +35,7 @@ namespace HotelBookingWebAPI
             services.AddMediatR(typeof(GetRoomsHandler).Assembly);
             services.AddScoped<IRoomRepository, RoomRepository>();
             services.AddScoped<IReservationRepository, ReservationRepository>();
+            services.AddScoped<IClientRepository, ClientRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

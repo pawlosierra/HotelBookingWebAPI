@@ -7,8 +7,9 @@ namespace HotelBookingWebAPI.Infrastructure.Models.Room
 {
     public class RoomModel
     {
-        public decimal PriceNight { get; set; }
+        public int RoomId { get; set; }
         public int RoomNumber { get; set; }
+        public decimal PriceNight { get; set; }
         public int RoomArea { get; set; }
         public int PeoplePerRoom { get; set; }
         public int NumberOfBeds { get; set; }

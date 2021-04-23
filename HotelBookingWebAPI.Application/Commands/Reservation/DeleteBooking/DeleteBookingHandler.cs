@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HotelBookingWebAPI.Application.Commands.Reservation.DeleteBooking
 {
-    public class DeleteBookingHandler : IRequestHandler<DeleteBooking, IEnumerable<Booking>>
+    public class DeleteBookingHandler : IRequestHandler<DeleteBooking, BookingValidation>
     {
         private readonly IReservationRepository _reservationRepository;
         private readonly IRoomRepository _roomRepository;
@@ -21,28 +21,32 @@ namespace HotelBookingWebAPI.Application.Commands.Reservation.DeleteBooking
             _roomRepository = roomRepository;
         }
 
-        public async Task<IEnumerable<Booking>> Handle(DeleteBooking request, CancellationToken cancellationToken)
+        public async Task<BookingValidation> Handle(DeleteBooking request, CancellationToken cancellationToken)
         {
             var rooms = await _roomRepository.GetRooms();
             var bookings = await _reservationRepository.GetBookings();
-            var validBooking = ValidBooking(bookings, request.BookingNumber);
-            if (validBooking.isValidBooking)
+            var bookingValidation = new BookingValidation();
+            if (bookings.Any(b => b.BookingNumber == request.BookingNumber))
             {
-                var updateRooms = UpdateRooms(rooms, validBooking.Booking);
-                await _roomRepository.UpdateRooms(updateRooms);
-                var updateBooking = UpdateBookings(bookings, validBooking.Booking);
-                await _reservationRepository.UpdateBooking(updateBooking);
-                return updateBooking;
+                await _roomRepository.UpdateRooms(UpdateRooms(rooms, bookings, request.BookingNumber));
+                await _reservationRepository.DeleteBooking(UpdateBookings(bookings, request.BookingNumber));
+                var reservedRoom = bookings.Where(b => b.BookingNumber == request.BookingNumber).FirstOrDefault();
+                bookingValidation.Booking = reservedRoom;
+                bookingValidation.IsValid = true;
+                return bookingValidation;
             }
-            return null;
+            bookingValidation.ErrorCode = "INVALID_BOOKING_NUMBER";
+            bookingValidation.Message = $"The bookingNumber {request.BookingNumber} is not valid. Not exist.";
+            bookingValidation.IsValid = false;
+            return bookingValidation;
         }
 
-        private IEnumerable<Booking> UpdateBookings(IEnumerable<Booking> bookings, Booking bookingRequest)
+        private IEnumerable<Booking> UpdateBookings(IEnumerable<Booking> bookings, int bookingNumber)
         {
             var updateBookings = new List<Booking>();
             foreach (var booking in bookings)
             {
-                if (booking.BookingNumber != bookingRequest.BookingNumber)
+                if (booking.BookingNumber != bookingNumber)
                 {
                     updateBookings.Add(booking);
                 }
@@ -50,48 +54,32 @@ namespace HotelBookingWebAPI.Application.Commands.Reservation.DeleteBooking
             return updateBookings;
         }
 
-        private IEnumerable<Room> UpdateRooms(IEnumerable<Room> rooms, Booking booking)
+        private IEnumerable<Room> UpdateRooms(IEnumerable<Room> rooms, IEnumerable<Booking> bookings ,int bookingNumber)
         {
+            var reservedRoom = bookings.Where(r => r.BookingNumber == bookingNumber).Select(r => new { r.Room, r.CheckIn, r.CheckOut }).FirstOrDefault();
             var updateRooms = new List<Room>();
-            var updateRoom = new Room();
+            var availableDates = new List<AvailableDate>();
+            var availableDate = new AvailableDate();
             foreach (var room in rooms)
             {
-                if (room.RoomNumber == booking.Room.RoomNumber)
+                if (room.RoomId == reservedRoom.Room.RoomId)
                 {
-                    var updateDates = new List<AvailableDate>();
-                    var updateDate = new AvailableDate();
-                    foreach (var availableDate in room.AvailableDates)
+                    foreach (var date in room.AvailableDates)
                     {
-                        updateDates.Add(availableDate);
+                        availableDates.Add(date);
                     }
-                    updateDate.CheckIn = booking.CheckIn;
-                    updateDate.CheckOut = booking.CheckOut;
-                    updateDates.Add(updateDate);
-                    room.AvailableDates = updateDates;
+                    availableDate.CheckIn = reservedRoom.CheckIn;
+                    availableDate.CheckOut = reservedRoom.CheckOut;
+                    availableDates.Add(availableDate);
+                    room.AvailableDates = availableDates;
                     updateRooms.Add(room);
                 }
-                else
+                else 
                 {
                     updateRooms.Add(room);
                 }
             }
             return updateRooms;
-        }
-
-        private (bool isValidBooking, Booking Booking) ValidBooking(IEnumerable<Booking> bookings, int bookingNumber)
-        {
-            bool isValidBooking = false;
-            var validBooking = new Booking();
-            foreach (var booking in bookings)
-            {
-                if (booking.BookingNumber == bookingNumber)
-                {
-                    validBooking = booking;
-                    isValidBooking = true;
-                    return (isValidBooking, validBooking);
-                }
-            }
-            return (isValidBooking, validBooking);
         }
     }
 }

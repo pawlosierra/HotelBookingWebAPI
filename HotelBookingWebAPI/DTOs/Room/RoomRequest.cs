@@ -9,7 +9,7 @@ namespace HotelBookingWebAPI.DTOs.Room
     public class RoomRequest
     {
         [Required(ErrorMessage = "The field PriceNight is required")]
-        [Range(450, 1000, ErrorMessage = "The PriceNight for {0} must be between {1} and {2}")]
+        [Range(657, 1267, ErrorMessage = "The PriceNight for {0} must be between {1} and {2}")]
         public decimal PriceNight { get; set; }
         [Required(ErrorMessage = "The field RoomArea is required")]
         [Range(807, 2745, ErrorMessage = "The RoomArea for {0} must be between {1} and {2} sq ft.")]
@@ -22,7 +22,7 @@ namespace HotelBookingWebAPI.DTOs.Room
         public int NumberOfBeds { get; set; }
         [Required(ErrorMessage = "The field NumberOfBeds is required")]
         public bool OceanView { get; set; }
-        [Required(ErrorMessage = "The field NumberOfBeds is required")]
+        [Required(ErrorMessage = "The field OceanView is required")]
         public bool FreeWiFi { get; set; }
         [Required(ErrorMessage = "The field AirConditioning is required")]
         public bool AirConditioning { get; set; }

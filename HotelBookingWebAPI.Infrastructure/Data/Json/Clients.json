@@ -1,0 +1,50 @@
+[
+  {
+    "clientId": 1,
+    "passport": "FRO076",
+    "name": "Mathieu",
+    "lastName": "David",
+    "email": "David@gmail.com",
+    "cellPhoneNumber": "65555555555"
+  },
+  {
+    "clientId": 2,
+    "passport": "CAN001",
+    "name": "Pawlo",
+    "lastName": "Arias",
+    "email": "Pawlo@gmail.com",
+    "cellPhoneNumber": "33333333333"
+  },
+  {
+    "clientId": 3,
+    "passport": "COL888",
+    "name": "juan",
+    "lastName": "SIERRA",
+    "email": "juan@hotmail.com",
+    "cellPhoneNumber": "88888888"
+  },
+  {
+    "clientId": 4,
+    "passport": "COL555",
+    "name": "Fernando",
+    "lastName": "Basto",
+    "email": "fernando@hotmail.com",
+    "cellPhoneNumber": "77777777777"
+  },
+  {
+    "clientId": 5,
+    "passport": "ESP234",
+    "name": "Maria",
+    "lastName": "Arias",
+    "email": "maria@hotmail.com",
+    "cellPhoneNumber": "11111111111"
+  },
+  {
+    "clientId": 6,
+    "passport": "ESC567",
+    "name": "James",
+    "lastName": "Rodrigues",
+    "email": "jamesd@hotmail.com",
+    "cellPhoneNumber": "98334333222"
+  }
+]

@@ -14,10 +14,15 @@ namespace HotelBookingWebAPI.Mappers
         public BookingProfile()
         {
             CreateMap<BookingRequest, Booking>()
-                .ForMember(dest => dest.Client, opt => opt.MapFrom(src => src.Client))
-                .ForMember(dest => dest.Room, opt => opt.MapFrom(src => src.Room));
-            CreateMap<ClientRequest, Client>();
-            CreateMap<RoomRequest, Room>();
+                .ForPath(dest => dest.Client.ClientId, opt => opt.MapFrom(src => src.ClientId))
+                .ForPath(dest => dest.Room.RoomId, opt => opt.MapFrom(src => src.RoomId));
+
+            CreateMap<Booking, BookingResponse>()
+                .ForMember(dest => dest.ClientId, opt => opt.MapFrom(src => src.Client.ClientId))
+                .ForMember(dest => dest.RoomId, opt => opt.MapFrom(src => src.Room.RoomId));
+
+            CreateMap<BookingValidation, BookingValidatioResponse>()
+                .ForMember(dest => dest.BookingResponse, opt => opt.MapFrom(src => src.Booking));
         }
     }
 }

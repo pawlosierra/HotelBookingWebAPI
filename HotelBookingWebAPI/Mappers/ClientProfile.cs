@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HotelBookingWebAPI.Domain.Models.Reservation;
-using HotelBookingWebAPI.DTOs.Room;
+using HotelBookingWebAPI.DTOs.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace HotelBookingWebAPI.Mappers
 {
-    public class RoomProfile : Profile
+    public class ClientProfile : Profile
     {
-        public RoomProfile()
+        public ClientProfile()
         {
-            CreateMap<Room, RoomResponse>();
-            CreateMap<RoomRequest, Room>();
+            CreateMap<ClientRequest, Client>();
+            CreateMap<Client, ClientResponse>();
         }
     }
 }

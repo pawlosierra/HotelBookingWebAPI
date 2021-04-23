@@ -43,19 +43,12 @@ namespace HotelBookingWebAPI.Controllers
                                             [FromQuery(Name = "priceNight")] decimal priceNight,
                                             [FromQuery(Name = "roomArea")] int roomArea,
                                             [FromQuery(Name = "peoplePerRoom")] int peoplePerRoom,
-                                            [FromQuery(Name = "numberOfBeds")] int numberOfBeds,
-                                            [FromQuery(Name = "availability")] bool availability,
-                                            [FromQuery(Name = "oceanView")] bool oceanView,
-                                            [FromQuery(Name = "freeWiFi")] bool freeWiFi,
-                                            [FromQuery(Name = "airConditioning")] bool airConditioning,
-                                            [FromQuery(Name = "petFriendly")] bool petFriendly,
-                                            [FromQuery(Name = "parkingIncluded")] bool parkingIncluded)
+                                            [FromQuery(Name = "numberOfBeds")] int numberOfBeds)
         {
             try
             {
-                var result = await _mediator.Send(new GetAvailableRoom(checkIn, checkOut, priceNight, roomArea,
-                                                                        peoplePerRoom, numberOfBeds, availability,oceanView, 
-                                                                        freeWiFi, airConditioning, petFriendly, parkingIncluded));
+                var result = await _mediator.Send(new GetAvailableRoom(checkIn, checkOut, priceNight,
+                                                                        roomArea, peoplePerRoom, numberOfBeds));
                 return Ok(result);
             }
             catch (Exception ex)

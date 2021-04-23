@@ -1,1 +1,34 @@
-[{"checkIn":"2021-04-24T00:00:00","checkOut":"2021-04-26T00:00:00","bookingNumber":94368,"travellers":4,"client":{"passport":"FRO076","name":"Mathieu","lastName":"David","email":"David@gmail.com","cellPhoneNumber":"65555555555"},"room":{"priceNight":750.0,"roomNumber":202,"roomArea":807,"peoplePerRoom":4,"numberOfBeds":2,"availability":true,"oceanView":true,"freeWiFi":true,"airConditioning":true,"petFriendly":true,"parkingIncluded":true,"availableDates":[]}}]
+[
+  {
+    "bookingNumber": 94368,
+    "checkIn": "2021-04-24T00:00:00",
+    "checkOut": "2021-04-26T00:00:00",
+    "travellers": 4,
+    "clientId": 1,
+    "roomId": 2
+  },
+  {
+    "bookingNumber": 92714,
+    "checkIn": "2021-04-20T00:00:00",
+    "checkOut": "2021-04-23T00:00:00",
+    "travellers": 4,
+    "clientId": 2,
+    "roomId": 3
+  },
+  {
+    "bookingNumber": 71856,
+    "checkIn": "2021-04-27T00:00:00",
+    "checkOut": "2021-04-30T00:00:00",
+    "travellers": 3,
+    "clientId": 3,
+    "roomId": 2
+  },
+  {
+    "bookingNumber": 51922,
+    "checkIn": "2021-05-01T00:00:00",
+    "checkOut": "2021-05-03T00:00:00",
+    "travellers": 3,
+    "clientId": 5,
+    "roomId": 2
+  }
+]

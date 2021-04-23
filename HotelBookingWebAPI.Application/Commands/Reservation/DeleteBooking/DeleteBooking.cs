@@ -6,7 +6,7 @@ using System.Text;
 
 namespace HotelBookingWebAPI.Application.Commands.Reservation.DeleteBooking
 {
-    public class DeleteBooking : IRequest<IEnumerable<Booking>>
+    public class DeleteBooking : IRequest<BookingValidation>
     {
         public DeleteBooking(int bookingNumber)
         {

@@ -1,4 +1,5 @@
-﻿using HotelBookingWebAPI.DTOs.Room;
+﻿using HotelBookingWebAPI.DTOs.Client;
+using HotelBookingWebAPI.DTOs.Room;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,13 +10,20 @@ namespace HotelBookingWebAPI.DTOs.Reservation
 {
     public class BookingRequest
     {
-        [Range(typeof(DateTime), "4/16/2021", "5/16/2021", ErrorMessage = "The Check-In for {0} must be between {1} and {2}.")]
+        [Required(ErrorMessage ="The field ChechIn is required")]
+        [RegularExpression(@"^\d{4}-((0\d)|(1[012]))-(([012]\d)|3[01])$", ErrorMessage = "Invalid date format. Requested format is: YYYY-MM-DD")]
         public string CheckIn { get; set; }
-        [Range(typeof(DateTime), "4/16/2021", "5/16/2021", ErrorMessage = "The Check-Out for {0} must be between {1} and {2}.")]
+        [Required(ErrorMessage = "The field ChechOut is required")]
+        [RegularExpression(@"^\d{4}-((0\d)|(1[012]))-(([012]\d)|3[01])$", ErrorMessage = "Invalid date format. Requested format is:YYYY-MM-DD ")]
         public string CheckOut { get; set; }
-        [Range(1, 7, ErrorMessage = "The value for {0} must be between {1} and {2}")]
+        [Required(ErrorMessage ="The field Traverllers is required")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
         public int Travellers { get; set; }
-        public ClientRequest Client { get; set; }
-        public RoomRequest Room { get; set; }
+        [Required(ErrorMessage = "The field ClientId is required")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
+        public int ClientId { get; set; }
+        [Required(ErrorMessage = "The field RoomdId is required")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
+        public int RoomId { get; set; }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HotelBookingWebAPI.Application.Commands.Reservation.AddBooking
 {
-    public class AddBookingHandler : IRequestHandler<AddBooking, Booking>
+    public class AddBookingHandler : IRequestHandler<AddBooking, BookingValidation>
     {
         private readonly IRoomRepository _roomRepository;
         private readonly IReservationRepository _reservationRepository;
@@ -21,49 +21,58 @@ namespace HotelBookingWebAPI.Application.Commands.Reservation.AddBooking
             _reservationRepository = reservationRepository;
         }
 
-        public async Task<Booking> Handle(AddBooking request, CancellationToken cancellationToken)
+        public async Task<BookingValidation> Handle(AddBooking request, CancellationToken cancellationToken)
         {
             var rooms = await _roomRepository.GetRooms();
-            var bookingAvailability = BookingAvailability(rooms, request.Booking);
-            if (bookingAvailability.theRoomIsAvailable)
+            var bookingValidation = new BookingValidation();
+            if (IsAvailableRoom(rooms, request.Booking))
             {
-                var booking = await _reservationRepository.AddBooking(bookingAvailability.bookingAvailability);
-                var updateRooms = UpdateRooms(rooms, booking);
+                var booking = new Booking
+                {
+                    CheckIn = request.Booking.CheckIn,
+                    CheckOut = request.Booking.CheckOut,
+                    BookingNumber = new Random().Next(10000,100000),
+                    Travellers = request.Booking.Travellers,
+                    Client = new Client
+                    {
+                        ClientId = request.Booking.Client.ClientId
+                    },
+                    Room = new Room
+                    {
+                        RoomId = request.Booking.Room.RoomId
+                    }
+                };
+                var updateRooms = UpdateRooms(rooms, request.Booking);
                 await _roomRepository.UpdateRooms(updateRooms);
-                return booking;
+                await _reservationRepository.AddBooking(booking);
+                bookingValidation.Booking = booking;
+                bookingValidation.IsValid = true;
+                return bookingValidation;
             }
-            return null;
+            bookingValidation.ErrorCode = "ROOM_NOT_AVAILABLE";
+            bookingValidation.Message = $"The roomId {request.Booking.Room.RoomId} is not available for {request.Booking.CheckIn} to " +
+                                        $"{request.Booking.CheckOut}.";
+            bookingValidation.IsValid = false;
+            return bookingValidation;
         }
-         
-        public IEnumerable<Room> UpdateRooms(IEnumerable<Room> rooms, Booking booking)
+
+        private IEnumerable<Room> UpdateRooms(IEnumerable<Room> rooms, Booking booking)
         {
             var updateRooms = new List<Room>();
-            var updateAvailableRoomDates = new List<AvailableDate>();
-            var updateRoom = new Room();
+            var availableDate = new List<AvailableDate>();
             foreach (var room in rooms)
             {
-                if (room.RoomNumber == booking.Room.RoomNumber)
+                if (room.RoomId == booking.Room.RoomId)
                 {
-                    updateRoom.PriceNight = room.PriceNight;
-                    updateRoom.RoomNumber = room.RoomNumber;
-                    updateRoom.RoomArea = room.RoomArea;
-                    updateRoom.PeoplePerRoom = room.PeoplePerRoom;
-                    updateRoom.NumberOfBeds = room.NumberOfBeds;
-                    updateRoom.Availability = room.Availability;
-                    updateRoom.OceanView = room.OceanView;
-                    updateRoom.FreeWiFi = room.FreeWiFi;
-                    updateRoom.AirConditioning = room.AirConditioning;
-                    updateRoom.PetFriendly = room.PetFriendly;
-                    updateRoom.ParkingIncluded = room.ParkingIncluded;
-                    foreach (var dateAvailable in room.AvailableDates)
+                    foreach (var date in room.AvailableDates)
                     {
-                        if (dateAvailable.CheckIn != booking.CheckIn && dateAvailable.CheckOut != booking.CheckOut)
+                        if (date.CheckIn != booking.CheckIn && date.CheckOut != booking.CheckOut)
                         {
-                            updateAvailableRoomDates.Add(dateAvailable);
-                            updateRoom.AvailableDates = updateAvailableRoomDates;
+                            availableDate.Add(date);
                         }
                     }
-                    updateRooms.Add(updateRoom);
+                    room.AvailableDates = availableDate;
+                    updateRooms.Add(room);
                 }
                 else
                 {
@@ -73,39 +82,10 @@ namespace HotelBookingWebAPI.Application.Commands.Reservation.AddBooking
             return updateRooms;
         }
 
-        public (Booking bookingAvailability, bool theRoomIsAvailable) BookingAvailability(IEnumerable<Room> rooms, Booking bookingRequest)
+        private bool IsAvailableRoom(IEnumerable<Room> rooms, Booking booking)
         {
-            var bookingAvailability = new Booking();
-            var theRoomIsAvailable = false;
-            foreach (var room in rooms)
-            {
-                foreach (var availableDate in room.AvailableDates)
-                {
-                    if (availableDate.CheckIn == bookingRequest.CheckIn && availableDate.CheckOut == bookingRequest.CheckOut)
-                    {
-                        
-                        theRoomIsAvailable = true;
-                        bookingAvailability.CheckIn = availableDate.CheckIn;
-                        bookingAvailability.CheckOut = availableDate.CheckOut;
-                        bookingAvailability.Travellers = bookingRequest.Travellers;
-                        bookingAvailability.Room = new Room();
-                        bookingAvailability.Room.PriceNight = room.PriceNight;
-                        bookingAvailability.Room.RoomNumber = room.RoomNumber;
-                        bookingAvailability.Room.RoomArea = room.RoomArea;
-                        bookingAvailability.Room.PeoplePerRoom = room.PeoplePerRoom;
-                        bookingAvailability.Room.NumberOfBeds = room.NumberOfBeds;
-                        bookingAvailability.Room.Availability = room.Availability;
-                        bookingAvailability.Room.OceanView = room.OceanView;
-                        bookingAvailability.Room.FreeWiFi = room.FreeWiFi;
-                        bookingAvailability.Room.AirConditioning = room.AirConditioning;
-                        bookingAvailability.Room.PetFriendly = room.PetFriendly;
-                        bookingAvailability.Room.ParkingIncluded = room.ParkingIncluded;
-                        bookingAvailability.Client = bookingRequest.Client;
-                        bookingAvailability.BookingNumber = new Random().Next(10000, 100000);
-                    }
-                }
-            }
-            return (bookingAvailability, theRoomIsAvailable);
+            var availableRoom = rooms.Any(r => r.AvailableDates.Any(ad => ad.CheckIn == booking.CheckIn && ad.CheckOut == booking.CheckOut) && r.RoomId == booking.Room.RoomId);
+            return availableRoom;
         }
     }
 }
