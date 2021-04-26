@@ -14,7 +14,5 @@ namespace HotelBookingWebAPI.Infrastructure.Models.Reservation
         public int Travellers { get; set; }
         public int ClientId { get; set; }
         public int RoomId { get; set; }
-        //public ClientModel Client { get; set; }
-        //public RoomModel Room { get; set; }
     }
 }

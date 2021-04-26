@@ -10,5 +10,6 @@ namespace HotelBookingWebAPI.Domain.Repositories
     {
         Task<IEnumerable<Client>> GetClients();
         Task<Client> AddClient(Client client);
+        Task UpdateClients(IEnumerable<Client> clients);
     }
 }

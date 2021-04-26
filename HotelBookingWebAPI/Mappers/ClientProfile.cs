@@ -14,6 +14,9 @@ namespace HotelBookingWebAPI.Mappers
         {
             CreateMap<ClientRequest, Client>();
             CreateMap<Client, ClientResponse>();
+
+            CreateMap<ClientValidation, ClientValidationResponse>()
+                .ForMember(dest => dest.ClientResponse, opt => opt.MapFrom(src => src.Client));
         }
     }
 }

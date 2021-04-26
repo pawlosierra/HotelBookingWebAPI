@@ -13,4 +13,6 @@
     <ProjectReference Include="..\HotelBookingWebAPI.Domain\HotelBookingWebAPI.Domain.csproj" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+
 </Project>

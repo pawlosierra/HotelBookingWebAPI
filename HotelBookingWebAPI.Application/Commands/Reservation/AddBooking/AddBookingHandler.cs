@@ -14,19 +14,38 @@ namespace HotelBookingWebAPI.Application.Commands.Reservation.AddBooking
     {
         private readonly IRoomRepository _roomRepository;
         private readonly IReservationRepository _reservationRepository;
+        private readonly IClientRepository _clientRepository;
 
-        public AddBookingHandler(IRoomRepository roomRepository, IReservationRepository reservationRepository)
+        public AddBookingHandler(IRoomRepository roomRepository, IReservationRepository reservationRepository, IClientRepository clientRepository)
         {
             _roomRepository = roomRepository;
             _reservationRepository = reservationRepository;
+            _clientRepository = clientRepository;
         }
 
         public async Task<BookingValidation> Handle(AddBooking request, CancellationToken cancellationToken)
         {
+            var clients = await _clientRepository.GetClients();
             var rooms = await _roomRepository.GetRooms();
             var bookingValidation = new BookingValidation();
+            if (!clients.Any(c => c.ClientId == request.Booking.Client.ClientId))
+            {
+                bookingValidation.ErrorCode = "UNREGISTERED_CLIENT";
+                bookingValidation.Message = $"Client {request.Booking.Client.ClientId} is not valid";
+                bookingValidation.IsValid = false;
+                return bookingValidation;
+            }
+                              
             if (IsAvailableRoom(rooms, request.Booking))
             {
+                var peoplePerRoom = rooms.Where(r => r.RoomId == request.Booking.Room.RoomId).Select(pr => pr.PeoplePerRoom).FirstOrDefault();
+                if (request.Booking.Travellers > peoplePerRoom)
+                {
+                    bookingValidation.ErrorCode = "NUMBER_OF_TRAVELERS_NOT_ALLOWED";
+                    bookingValidation.Message = $" {request.Booking.Travellers} travelers are not allowed for the selected room.";
+                    bookingValidation.IsValid = false;
+                    return bookingValidation;
+                }
                 var booking = new Booking
                 {
                     CheckIn = request.Booking.CheckIn,
@@ -84,6 +103,7 @@ namespace HotelBookingWebAPI.Application.Commands.Reservation.AddBooking
 
         private bool IsAvailableRoom(IEnumerable<Room> rooms, Booking booking)
         {
+            var guid = Guid.NewGuid();
             var availableRoom = rooms.Any(r => r.AvailableDates.Any(ad => ad.CheckIn == booking.CheckIn && ad.CheckOut == booking.CheckOut) && r.RoomId == booking.Room.RoomId);
             return availableRoom;
         }

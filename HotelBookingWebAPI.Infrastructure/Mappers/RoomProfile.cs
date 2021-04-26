@@ -13,7 +13,6 @@ namespace HotelBookingWebAPI.Infrastructure.Mappers
         public RoomProfile()
         {
             CreateMap<Room, RoomModel>();
-            //.ForMember(dest => dest.AvailableDates, opt => opt.MapFrom(src => src.AvailableDates));
             CreateMap<AvailableDate, AvailableDateModel>();
 
             CreateMap<RoomModel, Room>()

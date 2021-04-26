@@ -6,7 +6,7 @@ using System.Text;
 
 namespace HotelBookingWebAPI.Application.Commands.Clients.AddClient
 {
-    public class AddClient : IRequest<Client>
+    public class AddClient : IRequest<ClientValidation>
     {
         public AddClient(Client client)
         {

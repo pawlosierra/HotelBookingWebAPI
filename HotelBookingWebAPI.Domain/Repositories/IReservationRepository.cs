@@ -12,5 +12,7 @@ namespace HotelBookingWebAPI.Domain.Repositories
         Task<Booking> AddBooking(Booking booking);
         Task<IEnumerable<Booking>> UpdateBooking(IEnumerable<Booking> updateBooking);
         Task<IEnumerable<Booking>> DeleteBooking(IEnumerable<Booking>updateBooking);
+
+        //bool IsRoomAvailable(string id, DateTime checkin, DateTime checkout);
     }
 }

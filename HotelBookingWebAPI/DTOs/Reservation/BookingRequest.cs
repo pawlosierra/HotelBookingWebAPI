@@ -11,10 +11,10 @@ namespace HotelBookingWebAPI.DTOs.Reservation
     public class BookingRequest
     {
         [Required(ErrorMessage ="The field ChechIn is required")]
-        [RegularExpression(@"^\d{4}-((0\d)|(1[012]))-(([012]\d)|3[01])$", ErrorMessage = "Invalid date format. Requested format is: YYYY-MM-DD")]
+        [RegularExpression(@"^(19|20)\d\d-(0[1-9]|1[012])-([012]\d|3[01])T([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$", ErrorMessage = "Invalid date format. Requested format is: YYYY-MM-DDTHH:MM:SS")]
         public string CheckIn { get; set; }
         [Required(ErrorMessage = "The field ChechOut is required")]
-        [RegularExpression(@"^\d{4}-((0\d)|(1[012]))-(([012]\d)|3[01])$", ErrorMessage = "Invalid date format. Requested format is:YYYY-MM-DD ")]
+        [RegularExpression(@"^(19|20)\d\d-(0[1-9]|1[012])-([012]\d|3[01])T([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$", ErrorMessage = "Invalid date format. Requested format is: YYYY-MM-DDTHH:MM:SS")]
         public string CheckOut { get; set; }
         [Required(ErrorMessage ="The field Traverllers is required")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]

@@ -31,5 +31,10 @@ namespace HotelBookingWebAPI.Infrastructure.Repositories
             _hotelContext.serializeClientModel(clientModel);
             return client;
         }
+        public async Task UpdateClients(IEnumerable<Client> clients)
+        {
+            var clientsModel = _mapper.Map<IEnumerable<ClientModel>>(clients);
+            _hotelContext.serializeClientsModel(clientsModel);
+        }
     }
 }

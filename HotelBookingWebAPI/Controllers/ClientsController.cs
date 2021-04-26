@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using HotelBookingWebAPI.Application.Commands.Clients.AddClient;
+using HotelBookingWebAPI.Application.Commands.Clients.UpdateClient;
 using HotelBookingWebAPI.Application.Queries.Clients.GetClients;
 using HotelBookingWebAPI.Domain.Models.Reservation;
 using HotelBookingWebAPI.DTOs.Client;
@@ -46,7 +48,28 @@ namespace HotelBookingWebAPI.Controllers
             try
             {
                 var client = _mapper.Map<Client>(clientRequest);
-                var result = await _mediator.Send(new AddClient(client));
+                var clientValidation = await _mediator.Send(new AddClient(client));
+                var result = _mapper.Map<ClientValidationResponse>(clientValidation);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([Required(ErrorMessage = "The field clientId is required")]
+                                                [Range(1, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
+                                                int clientId,
+            ClientRequest clientRequest
+
+                                                )
+        {
+            try
+            {
+                var clientUpdateRequest = _mapper.Map<Client>(clientRequest);
+                var clientValidation = await _mediator.Send(new UpdateClient(clientUpdateRequest, clientId));
+                var result = _mapper.Map<ClientValidationResponse>(clientValidation);
                 return Ok(result);
             }
             catch (Exception ex)

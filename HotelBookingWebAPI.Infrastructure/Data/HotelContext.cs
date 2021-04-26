@@ -23,6 +23,11 @@ namespace HotelBookingWebAPI.Infrastructure.Data
             List<ClientModel> clients = JsonConvert.DeserializeObject<List<ClientModel>>(jsonFile);
             return clients;
         }
+        public void serializeClientsModel(IEnumerable<ClientModel> clientModels)
+        {
+            string clientModelsJson = JsonConvert.SerializeObject(clientModels, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver()});
+            File.WriteAllText(_client, clientModelsJson);
+        }
         public void serializeClientModel(ClientModel clientModel)
         {
             var clients = DeserializeClientModel();

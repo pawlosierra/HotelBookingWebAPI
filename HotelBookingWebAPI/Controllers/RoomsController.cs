@@ -40,14 +40,15 @@ namespace HotelBookingWebAPI.Controllers
         public async Task<IActionResult> GetAvailableRoom(
                                             [FromQuery(Name = "checkIn")][Required] string checkIn,
                                             [FromQuery(Name = "checkOut")][Required] string checkOut,
-                                            [FromQuery(Name = "priceNight")] decimal priceNight,
+                                            [FromQuery(Name = "priceNightMin")] decimal priceNightMin,
+                                            [FromQuery(Name = "priceNightMax")] decimal priceNightMax,
                                             [FromQuery(Name = "roomArea")] int roomArea,
                                             [FromQuery(Name = "peoplePerRoom")] int peoplePerRoom,
                                             [FromQuery(Name = "numberOfBeds")] int numberOfBeds)
         {
             try
             {
-                var result = await _mediator.Send(new GetAvailableRoom(checkIn, checkOut, priceNight,
+                var result = await _mediator.Send(new GetAvailableRoom(checkIn, checkOut, priceNightMin, priceNightMax,
                                                                         roomArea, peoplePerRoom, numberOfBeds));
                 return Ok(result);
             }
