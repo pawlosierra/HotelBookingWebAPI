@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using HotelBookingWebAPI.Domain.Models.Reservation;
-using HotelBookingWebAPI.DTOs.Reservation;
+using HotelBookingWebAPI.Domain.Models.Bookings;
+using HotelBookingWebAPI.DTOs.Bookings;
 using HotelBookingWebAPI.DTOs.Room;
 using System;
 using System.Collections.Generic;
@@ -14,6 +14,10 @@ namespace HotelBookingWebAPI.Mappers
         public BookingProfile()
         {
             CreateMap<BookingRequest, Booking>()
+                .ForPath(dest => dest.Client.ClientId, opt => opt.MapFrom(src => src.ClientId))
+                .ForPath(dest => dest.Room.RoomId, opt => opt.MapFrom(src => src.RoomId));
+
+            CreateMap<BookingUpdateRequest, Booking>()
                 .ForPath(dest => dest.Client.ClientId, opt => opt.MapFrom(src => src.ClientId))
                 .ForPath(dest => dest.Room.RoomId, opt => opt.MapFrom(src => src.RoomId));
 

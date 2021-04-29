@@ -1,4 +1,4 @@
-﻿using HotelBookingWebAPI.Domain.Models.Reservation;
+﻿using HotelBookingWebAPI.Domain.Models.Bookings;
 using MediatR;
 using System;
 using System.Collections.Generic;

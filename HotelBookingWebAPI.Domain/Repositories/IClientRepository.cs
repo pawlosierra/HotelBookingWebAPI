@@ -1,4 +1,4 @@
-﻿using HotelBookingWebAPI.Domain.Models.Reservation;
+﻿using HotelBookingWebAPI.Domain.Models.Bookings;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +10,8 @@ namespace HotelBookingWebAPI.Domain.Repositories
     {
         Task<IEnumerable<Client>> GetClients();
         Task<Client> AddClient(Client client);
-        Task UpdateClients(IEnumerable<Client> clients);
+        Task<Client> UpdateClient(Client clientRequest);
+        Task<bool> Exists(string bookingNumber);
+        Task<Client> DeleteClient(string bookingNumber);
     }
 }

@@ -1,4 +1,4 @@
-﻿using HotelBookingWebAPI.Domain.Models.Reservation;
+﻿using HotelBookingWebAPI.Domain.Models.Bookings;
 using HotelBookingWebAPI.Domain.Repositories;
 using MediatR;
 using System;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HotelBookingWebAPI.Application.Queries.Reservation.GetRooms
+namespace HotelBookingWebAPI.Application.Queries.Bookings.GetRooms
 {
     public class GetRoomsHandler : IRequestHandler<GetRooms, IEnumerable<Room>>
     {

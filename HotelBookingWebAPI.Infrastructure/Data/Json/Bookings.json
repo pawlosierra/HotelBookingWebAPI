@@ -1,1 +1,138 @@
-[{"bookingNumber":94368,"checkIn":"2021-04-24T00:00:00","checkOut":"2021-04-26T00:00:00","travellers":4,"clientId":1,"roomId":2},{"bookingNumber":71856,"checkIn":"2021-04-27T00:00:00","checkOut":"2021-04-30T00:00:00","travellers":3,"clientId":3,"roomId":2},{"bookingNumber":51922,"checkIn":"2021-05-01T00:00:00","checkOut":"2021-05-03T00:00:00","travellers":3,"clientId":5,"roomId":2},{"bookingNumber":91371,"checkIn":"2021-04-27T00:00:00","checkOut":"2021-04-30T00:00:00","travellers":2,"clientId":4,"roomId":4},{"bookingNumber":56468,"checkIn":"2021-05-01T00:00:00","checkOut":"2021-05-03T00:00:00","travellers":2,"clientId":6,"roomId":4},{"bookingNumber":34190,"checkIn":"2021-04-13T00:00:00","checkOut":"2021-04-15T00:00:00","travellers":3,"clientId":8,"roomId":6},{"bookingNumber":50014,"checkIn":"2021-04-03T00:00:00","checkOut":"2021-04-05T00:00:00","travellers":4,"clientId":8,"roomId":6}]
+[
+  {
+    "bookingNumber": "94368",
+    "checkIn": "2021-05-27T00:00:00",
+    "checkOut": "2021-05-29T00:00:00",
+    "travellers": 3,
+    "clientId": "1",
+    "roomId": "3"
+  },
+  {
+    "bookingNumber": "71856",
+    "checkIn": "2021-04-28T00:00:00",
+    "checkOut": "2021-04-30T00:00:00",
+    "travellers": 3,
+    "clientId": "3",
+    "roomId": "2"
+  },
+  {
+    "bookingNumber": "51922",
+    "checkIn": "2021-05-01T00:00:00",
+    "checkOut": "2021-05-03T00:00:00",
+    "travellers": 3,
+    "clientId": "5",
+    "roomId": "2"
+  },
+  {
+    "bookingNumber": "91371",
+    "checkIn": "2021-05-02T00:00:00",
+    "checkOut": "2021-05-05T00:00:00",
+    "travellers": 2,
+    "clientId": "4",
+    "roomId": "4"
+  },
+  {
+    "bookingNumber": "56468",
+    "checkIn": "2021-05-01T00:00:00",
+    "checkOut": "2021-05-03T00:00:00",
+    "travellers": 2,
+    "clientId": "6",
+    "roomId": "4"
+  },
+  {
+    "bookingNumber": "34190",
+    "checkIn": "2021-05-13T00:00:00",
+    "checkOut": "2021-05-15T00:00:00",
+    "travellers": 3,
+    "clientId": "8",
+    "roomId": "6"
+  },
+  {
+    "bookingNumber": "47755",
+    "checkIn": "2021-05-27T00:00:00",
+    "checkOut": "2021-05-29T00:00:00",
+    "travellers": 2,
+    "clientId": "3",
+    "roomId": "2"
+  },
+  {
+    "bookingNumber": "14025",
+    "checkIn": "2021-05-21T00:00:00",
+    "checkOut": "2021-05-23T00:00:00",
+    "travellers": 2,
+    "clientId": "3",
+    "roomId": "2"
+  },
+  {
+    "bookingNumber": "88337",
+    "checkIn": "2021-05-07T00:00:00",
+    "checkOut": "2021-05-09T00:00:00",
+    "travellers": 2,
+    "clientId": "3",
+    "roomId": "2"
+  },
+  {
+    "bookingNumber": "71024",
+    "checkIn": "2021-05-03T00:00:00",
+    "checkOut": "2021-05-05T00:00:00",
+    "travellers": 3,
+    "clientId": "3",
+    "roomId": "6"
+  },
+  {
+    "bookingNumber": "17158",
+    "checkIn": "2021-05-09T00:00:00",
+    "checkOut": "2021-05-11T00:00:00",
+    "travellers": 4,
+    "clientId": "5",
+    "roomId": "6"
+  },
+  {
+    "bookingNumber": "23433",
+    "checkIn": "2021-05-13T00:00:00",
+    "checkOut": "2021-05-15T00:00:00",
+    "travellers": 2,
+    "clientId": "2",
+    "roomId": "3"
+  },
+  {
+    "bookingNumber": "2e04ff07-7142-4f5a-b7e0-e814f95c5690",
+    "checkIn": "2021-05-04T00:00:00",
+    "checkOut": "2021-05-06T00:00:00",
+    "travellers": 2,
+    "clientId": "2",
+    "roomId": "1"
+  },
+  {
+    "bookingNumber": "bb887d46-319e-484a-8f79-0760cb8f00f7",
+    "checkIn": "2021-05-10T00:00:00",
+    "checkOut": "2021-05-12T00:00:00",
+    "travellers": 4,
+    "clientId": "1",
+    "roomId": "1"
+  },
+  {
+    "bookingNumber": "f9f27967-af26-4ed5-9b32-29a2533df8ed",
+    "checkIn": "2021-05-14T00:00:00",
+    "checkOut": "2021-05-17T00:00:00",
+    "travellers": 4,
+    "clientId": "a03616a5-0064-4c0b-b43b-9e19c025b6a9",
+    "roomId": "5"
+  },
+  {
+    "bookingNumber": "f06a395a-07f5-44f6-983b-df2f3298b64e",
+    "checkIn": "2021-05-07T00:00:00",
+    "checkOut": "2021-05-10T00:00:00",
+    "travellers": 4,
+    "clientId": "a03616a5-0064-4c0b-b43b-9e19c025b6a9",
+    "roomId": "5"
+  },
+  {
+    "bookingNumber": "4df48012-c1b3-40c6-88ae-4c622a9ba1a8",
+    "checkIn": "2021-05-25T00:00:00",
+    "checkOut": "2021-05-27T00:00:00",
+    "travellers": 2,
+    "clientId": "a03616a5-0064-4c0b-b43b-9e19c025b6a9",
+    "roomId": "1"
+  }
+]

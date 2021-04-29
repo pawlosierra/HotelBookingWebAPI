@@ -1,4 +1,4 @@
-﻿using HotelBookingWebAPI.DTOs.Reservation;
+﻿using HotelBookingWebAPI.DTOs.Bookings;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -6,9 +6,11 @@ using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using HotelBookingWebAPI.Application.Commands.Clients.AddClient;
+using HotelBookingWebAPI.Application.Commands.Clients.DeleteClient;
 using HotelBookingWebAPI.Application.Commands.Clients.UpdateClient;
 using HotelBookingWebAPI.Application.Queries.Clients.GetClients;
-using HotelBookingWebAPI.Domain.Models.Reservation;
+using HotelBookingWebAPI.Domain.Models.Exceptions;
+using HotelBookingWebAPI.Domain.Models.Bookings;
 using HotelBookingWebAPI.DTOs.Client;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -48,29 +50,64 @@ namespace HotelBookingWebAPI.Controllers
             try
             {
                 var client = _mapper.Map<Client>(clientRequest);
-                var clientValidation = await _mediator.Send(new AddClient(client));
-                var result = _mapper.Map<ClientValidationResponse>(clientValidation);
+                var clientCreated = await _mediator.Send(new AddClient(client));
+                var result = _mapper.Map<ClientResponse>(clientCreated);
                 return Ok(result);
+            }
+            catch (ClientException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ClientError() 
+                {
+                    ErrorCode = ex.ErrorCode,
+                    Message = ex.Message
+                });
             }
             catch (Exception ex)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex);
             }
         }
-        [HttpPut("{id}")]
+        [HttpPut("{clientId}")]
         public async Task<IActionResult> Put([Required(ErrorMessage = "The field clientId is required")]
-                                                [Range(1, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
-                                                int clientId,
-            ClientRequest clientRequest
-
-                                                )
+                                              string clientId, ClientUpdateRequest clientRequest)
         {
             try
             {
                 var clientUpdateRequest = _mapper.Map<Client>(clientRequest);
-                var clientValidation = await _mediator.Send(new UpdateClient(clientUpdateRequest, clientId));
-                var result = _mapper.Map<ClientValidationResponse>(clientValidation);
+                var upgradedCustomer = await _mediator.Send(new UpdateClient(clientUpdateRequest, clientId));
+                var result = _mapper.Map<ClientResponse>(upgradedCustomer);
                 return Ok(result);
+            }
+            catch (ClientException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ClientError() 
+                {
+                    ErrorCode = ex.ErrorCode,
+                    Message = ex.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
+        [HttpDelete("{clientId}")]
+        public async Task<IActionResult> Delete([Required(ErrorMessage = "The field clientId is required")]
+                                                string clientId)
+        {
+            try
+            {
+                var clientDeleted = await _mediator.Send(new DeleteClient(clientId));
+                var result = _mapper.Map<ClientResponse>(clientDeleted);
+                return Ok(result);
+            }
+            catch(ClientException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ClientError 
+                {
+                    ErrorCode = ex.ErrorCode,
+                    Message = ex.Message
+                });
             }
             catch (Exception ex)
             {

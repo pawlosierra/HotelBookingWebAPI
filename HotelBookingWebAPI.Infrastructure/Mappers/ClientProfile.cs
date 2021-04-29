@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using HotelBookingWebAPI.Domain.Models.Reservation;
+using HotelBookingWebAPI.Domain.Models.Bookings;
 using HotelBookingWebAPI.Infrastructure.Models.Client;
 using System;
 using System.Collections.Generic;

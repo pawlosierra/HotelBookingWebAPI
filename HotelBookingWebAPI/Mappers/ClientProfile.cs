@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using HotelBookingWebAPI.Domain.Models.Reservation;
+using HotelBookingWebAPI.Domain.Models.Bookings;
 using HotelBookingWebAPI.DTOs.Client;
 using System;
 using System.Collections.Generic;
@@ -14,6 +14,8 @@ namespace HotelBookingWebAPI.Mappers
         {
             CreateMap<ClientRequest, Client>();
             CreateMap<Client, ClientResponse>();
+
+            CreateMap<ClientUpdateRequest, Client>();
 
             CreateMap<ClientValidation, ClientValidationResponse>()
                 .ForMember(dest => dest.ClientResponse, opt => opt.MapFrom(src => src.Client));

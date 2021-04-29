@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
-using HotelBookingWebAPI.Domain.Models.Reservation;
+using HotelBookingWebAPI.Domain.Models.Bookings;
 using HotelBookingWebAPI.Domain.Repositories;
 using HotelBookingWebAPI.Infrastructure.Data;
-using HotelBookingWebAPI.Infrastructure.Models.Reservation;
+using HotelBookingWebAPI.Infrastructure.Models.Booking;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,29 +22,82 @@ namespace HotelBookingWebAPI.Infrastructure.Repositories
             _hotelContext = new HotelContext();
         }
 
-        public async Task<IEnumerable<Booking>> GetBookings()
+        public Task<IEnumerable<Booking>> GetBookings()
         {
-            var bookings = _hotelContext.DeserializeBookingModel();
-            var resp = _mapper.Map<IEnumerable<Booking>>(bookings);
-            return resp;
+            return Task.Run(() =>
+            {
+                var bookings = _hotelContext.DeserializeBookingModel();
+                return _mapper.Map<IEnumerable<Booking>>(bookings);
+            });
         }
-        public async Task<Booking> AddBooking(Booking booking)
+        public Task<Booking> AddBooking(Booking booking)
         {
-            var bookingModel = _mapper.Map<BookingModel>(booking);
-            _hotelContext.SerializeBooking(bookingModel);
-            return booking;
+            return Task.Run(() =>
+            {
+                var bookingModel = _mapper.Map<BookingModel>(booking);
+                bookingModel.BookingNumber = Guid.NewGuid().ToString();
+                _hotelContext.SerializeBooking(bookingModel);
+                var bookingCreated = _mapper.Map<Booking>(bookingModel);
+                return bookingCreated;
+            });
         }
-        public async Task<IEnumerable<Booking>> UpdateBooking(IEnumerable<Booking> updateBooking)
+        public Task<Booking> UpdateBooking(Booking bookingRequest)
         {
-            var bookingModel = _mapper.Map<IEnumerable<BookingModel>>(updateBooking);
-            _hotelContext.SerializeBookings(bookingModel);
-            return updateBooking;
+            return Task.Run(() =>
+            {
+                var bookingModel = _mapper.Map<BookingModel>(bookingRequest);
+                var bookings = _hotelContext.DeserializeBookingModel();
+                foreach (var booking in bookings)
+                {
+                    if (booking.BookingNumber == bookingRequest.BookingNumber)
+                    {
+                        booking.CheckIn = bookingModel.CheckIn;
+                        booking.CheckOut = bookingModel.CheckOut;
+                        booking.Travellers = bookingModel.Travellers;
+                        booking.RoomId = bookingModel.RoomId;
+                    }
+                }
+                _hotelContext.SerializeBookings(bookings);
+                return bookingRequest;
+            });
         }
-        public async Task<IEnumerable<Booking>> DeleteBooking(IEnumerable<Booking> updateBooking)
+        public Task<Booking> DeleteBooking(string bookingId)
         {
-            var bookingModel = _mapper.Map<IEnumerable<BookingModel>>(updateBooking);
-            _hotelContext.SerializeBookings(bookingModel);
-            return updateBooking;
+            return Task.Run(() => 
+            {
+                var bookings = _hotelContext.DeserializeBookingModel();
+                var bookingDeleted = bookings.Where(b => b.BookingNumber == bookingId).FirstOrDefault();
+                var updatedBooking = bookings.Where(b => b.BookingNumber != bookingId);
+                _hotelContext.SerializeBookings(updatedBooking);
+                return _mapper.Map<Booking>(bookingDeleted);
+            });
+        }
+
+        public Task<bool> IsRoomAvailable(string roomId, DateTime checkin, DateTime checkout)
+        {
+            return Task.Run(() =>
+            {
+                var bookings = _hotelContext.DeserializeBookingModel();
+                if (bookings.Any(b => b.RoomId == roomId 
+                && ((b.CheckIn <= checkin && checkin <= b.CheckOut) || (b.CheckIn <= checkout && checkout <= b.CheckOut))))
+                {
+                    return false;
+                }
+                return true;
+            });
+        }
+
+        public Task<bool> Exists(string bookingId)
+        {
+            return Task.Run(() => 
+            {
+                var bookings = _hotelContext.DeserializeBookingModel();
+                if (bookings.Any(b => b.BookingNumber == bookingId))
+                {
+                    return true;
+                }
+                return false;
+            });
         }
     }
 }

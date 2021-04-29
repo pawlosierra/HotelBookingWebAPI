@@ -1,5 +1,5 @@
 ﻿using HotelBookingWebAPI.Infrastructure.Models.Client;
-using HotelBookingWebAPI.Infrastructure.Models.Reservation;
+using HotelBookingWebAPI.Infrastructure.Models.Booking;
 using HotelBookingWebAPI.Infrastructure.Models.Room;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using HotelBookingWebAPI.Domain.Models.Reservation;
-using HotelBookingWebAPI.Infrastructure.Models.Reservation;
+using HotelBookingWebAPI.Domain.Models.Bookings;
+using HotelBookingWebAPI.Infrastructure.Models.Booking;
 using HotelBookingWebAPI.Infrastructure.Models.Room;
 using System;
 using System.Collections.Generic;

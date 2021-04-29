@@ -6,7 +6,7 @@ namespace HotelBookingWebAPI.Infrastructure.Models.Client
 {
     public class ClientModel
     {
-        public int ClientId { get; set; }
+        public string ClientId { get; set; }
         public string Passport { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }

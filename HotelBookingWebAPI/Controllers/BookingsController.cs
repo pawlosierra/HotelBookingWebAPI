@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
-using HotelBookingWebAPI.Application.Commands.Reservation.AddBooking;
-using HotelBookingWebAPI.Application.Commands.Reservation.DeleteBooking;
-using HotelBookingWebAPI.Application.Commands.Reservation.UpdateBooking;
-using HotelBookingWebAPI.Application.Queries.Reservations.GetBookings;
-using HotelBookingWebAPI.Domain.Models.Reservation;
-using HotelBookingWebAPI.DTOs.Reservation;
+using HotelBookingWebAPI.Application.Commands.Bookings.AddBooking;
+using HotelBookingWebAPI.Application.Commands.Bookings.DeleteBooking;
+using HotelBookingWebAPI.Application.Commands.Bookings.UpdateBooking;
+using HotelBookingWebAPI.Application.Queries.Bookings.GetBookings;
+using HotelBookingWebAPI.Domain.Models.Bookings;
+using HotelBookingWebAPI.Domain.Models.Exceptions;
+using HotelBookingWebAPI.DTOs.Bookings;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -49,9 +50,18 @@ namespace HotelBookingWebAPI.Controllers
             try
             {
                 var booking = _mapper.Map<Booking>(bookingRequest);
-                var bookingValidation = await _mediator.Send(new AddBooking(booking));
-                var result = _mapper.Map<BookingValidatioResponse>(bookingValidation);
+                var bookingCreated = await _mediator.Send(new AddBooking(booking));
+                var result = _mapper.Map<BookingResponse>(bookingCreated);
+
                 return Ok(result);
+            }
+            catch (BookingException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, new BookingError()
+                {
+                    ErrorCode = ex.ErrorCode,
+                    Message = ex.Message
+                });
             }
             catch (Exception ex)
             {
@@ -59,19 +69,24 @@ namespace HotelBookingWebAPI.Controllers
             }
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update(BookingRequest bookingUpDate,
-                                                [FromQuery(Name = "bookingNumber")]
-                                                [Required(ErrorMessage = "The field bookingNumber is required")]
-                                                [Range(10000, 100000, ErrorMessage = "The value for {0} must be between {1} and {2}")]
-                                                int bookingNumber)
+        [HttpPut("{bookingNumber}")]
+        public async Task<IActionResult> Update([Required(ErrorMessage = "The field bookingNumber is required")]
+                                                string bookingNumber, BookingUpdateRequest bookingUpDate)
         {
             try
             {
                 var bookingUpdateRequest = _mapper.Map<Booking>(bookingUpDate);
-                var bookingValidation = await _mediator.Send(new UpdateBooking(bookingUpdateRequest, bookingNumber));
-                var result = _mapper.Map<BookingValidatioResponse>(bookingValidation);
+                var updatedBooking = await _mediator.Send(new UpdateBooking(bookingUpdateRequest, bookingNumber));
+                var result = _mapper.Map<BookingResponse>(updatedBooking);
                 return Ok(result);
+            }
+            catch (BookingException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, new BookingError()
+                {
+                    ErrorCode = ex.ErrorCode,
+                    Message = ex.Message
+                });
             }
             catch (Exception ex)
             {
@@ -79,17 +94,24 @@ namespace HotelBookingWebAPI.Controllers
             }
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete([FromQuery(Name = "bookingNumber")]
-                                                [Required(ErrorMessage = "The field bookingNumber is required")]
+        [HttpDelete("{bookingNumber}")]
+        public async Task<IActionResult> Delete([Required(ErrorMessage = "The field bookingNumber is required")]
                                                 [Range(10000, 100000, ErrorMessage = "The value for {0} must be between {1} and {2}")]
-                                                int bookingNumber)
+                                                string bookingNumber)
         {
             try
             {
                 var booking = await _mediator.Send(new DeleteBooking(bookingNumber));
-                var result = _mapper.Map<BookingValidatioResponse>(booking);
+                var result = _mapper.Map<BookingResponse>(booking);
                 return Ok(result);
+            }
+            catch(BookingException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, new BookingError 
+                {
+                    ErrorCode = ex.ErrorCode,
+                    Message = ex.Message
+                });
             }
             catch (Exception ex)
             {
