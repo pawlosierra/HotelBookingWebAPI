@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using HotelBookingWebAPI.Application.Commands.Clients.AddClient;
 using HotelBookingWebAPI.Application.Commands.Clients.DeleteClient;
 using HotelBookingWebAPI.Application.Commands.Clients.UpdateClient;
+using HotelBookingWebAPI.Application.Queries.Clients.GetClientById;
 using HotelBookingWebAPI.Application.Queries.Clients.GetClients;
-using HotelBookingWebAPI.Domain.Models.Exceptions;
 using HotelBookingWebAPI.Domain.Models.Bookings;
+using HotelBookingWebAPI.Domain.Models.Exceptions;
 using HotelBookingWebAPI.DTOs.Client;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace HotelBookingWebAPI.Controllers
 {
@@ -44,6 +42,31 @@ namespace HotelBookingWebAPI.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex);
             }
         }
+        
+        [HttpGet("{clientId}")]
+        public async Task<IActionResult> Get([Required(ErrorMessage = "The field clientId is required")]
+                                              string clientId) 
+        {
+            try
+            {
+                var client = await _mediator.Send(new GetClientById(clientId));
+                var result = _mapper.Map<ClientResponse>(client);
+                return Ok(result);
+            }
+            catch(ClientException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ClientError 
+                {
+                    ErrorCode = ex.ErrorCode,
+                    Message = ex.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(ClientRequest clientRequest)
         {

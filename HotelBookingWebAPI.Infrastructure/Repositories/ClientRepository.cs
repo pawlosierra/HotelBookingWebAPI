@@ -29,6 +29,17 @@ namespace HotelBookingWebAPI.Infrastructure.Repositories
                 return _mapper.Map<IEnumerable<Client>>(clients);
             });
         }
+
+        public Task<Client> GetClientById(string clientId)
+        {
+            return Task.Run(() => 
+            {
+                var clients = _hotelContext.DeserializeClientModel();
+                var client = clients.Where(c => c.ClientId == clientId).First();
+                return _mapper.Map<Client>(client);
+            });
+        }
+
         public Task<Client> AddClient(Client client)
         {
             return Task.Run(() => 
@@ -62,24 +73,24 @@ namespace HotelBookingWebAPI.Infrastructure.Repositories
             });
         }
 
-        public Task<Client> DeleteClient(string bookingNumber)
+        public Task<Client> DeleteClient(string clientId)
         {
             return Task.Run(() => 
             {
                 var clients = _hotelContext.DeserializeClientModel();
-                var deletedClient = clients.Where(c => c.ClientId == bookingNumber).FirstOrDefault();
-                var upgradedClients = clients.Where(c => c.ClientId != bookingNumber);
+                var deletedClient = clients.Where(c => c.ClientId == clientId).FirstOrDefault();
+                var upgradedClients = clients.Where(c => c.ClientId != clientId);
                 _hotelContext.serializeClientsModel(upgradedClients);
                 return _mapper.Map<Client>(deletedClient);
             });
         }
 
-        public Task<bool> Exists(string bookingNumber)
+        public Task<bool> Exists(string clientId)
         {
             return Task.Run(() =>
             {
                 var clients = _hotelContext.DeserializeClientModel();
-                if (clients.Any(c => c.ClientId == bookingNumber))
+                if (clients.Any(c => c.ClientId == clientId))
                 {
                     return true;
                 }

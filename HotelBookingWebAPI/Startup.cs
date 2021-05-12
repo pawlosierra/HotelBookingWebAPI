@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HotelBookingWebAPI.Application.Queries.Bookings.GetBookings;
 using HotelBookingWebAPI.Application.Queries.Bookings.GetRooms;
 using HotelBookingWebAPI.Domain.Repositories;
+using HotelBookingWebAPI.Infrastructure.Configurations;
 using HotelBookingWebAPI.Infrastructure.Mappers;
 using HotelBookingWebAPI.Infrastructure.Repositories;
 using MediatR;
@@ -32,6 +33,11 @@ namespace HotelBookingWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            var settings = Configuration.GetSection("AppSettings").Get<AppSettings>();
+            
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddMediatR(typeof(GetRoomsHandler).Assembly);
             services.AddScoped<IRoomRepository, RoomRepository>();

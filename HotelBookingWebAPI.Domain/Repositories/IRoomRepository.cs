@@ -9,8 +9,11 @@ namespace HotelBookingWebAPI.Domain.Repositories
     public interface IRoomRepository
     {
         Task<IEnumerable<Room>> GetRooms();
+        Task<Room> GetRoomById(string roomId);
         Task UpdateRooms(IEnumerable<Room> updateRooms);
         Task<IEnumerable<Room>> SearchAvailableRooms(DateTime chechIn, DateTime checkOut, decimal priceNightMin,
                                                 decimal priceNightMax, int RoomArea, int peoplePerRoom, int NumberOfBeds);
+        Task<bool> Exists(string roomId);
+        
     }
 }

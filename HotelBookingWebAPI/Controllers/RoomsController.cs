@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HotelBookingWebAPI.Application.Queries.Bookings.GetRooms;
 using HotelBookingWebAPI.Application.Queries.Rooms.GetAvailableRooms;
+using HotelBookingWebAPI.Application.Queries.Rooms.GetRoomById;
 using HotelBookingWebAPI.Domain.Models.Exceptions;
 using HotelBookingWebAPI.DTOs.Room;
 using MediatR;
@@ -32,6 +33,30 @@ namespace HotelBookingWebAPI.Controllers
             {
                 var result = await _mediator.Send(new GetRooms());
                 return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        [HttpGet("{roomId}")]
+        public async Task<IActionResult> Get([Required(ErrorMessage = "The field roomId is required")]
+                                              string roomId)
+        {
+            try
+            {
+                var room = await _mediator.Send(new GetRoomById(roomId));
+                var result = _mapper.Map<RoomResponse>(room);
+                return Ok(result);
+            }
+            catch (RoomException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, new RoomError
+                {
+                    ErrorCode = ex.ErrorCode,
+                    Message = ex.Message
+                });
             }
             catch (Exception ex)
             {

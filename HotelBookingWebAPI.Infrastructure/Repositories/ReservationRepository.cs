@@ -30,6 +30,15 @@ namespace HotelBookingWebAPI.Infrastructure.Repositories
                 return _mapper.Map<IEnumerable<Booking>>(bookings);
             });
         }
+        public Task<Booking> GetBookingById(string bookingNumber)
+        {
+            return Task.Run(() => 
+            {
+                var bookings = _hotelContext.DeserializeBookingModel();
+                var booking = bookings.Where(b => b.BookingNumber == bookingNumber).First();
+                return _mapper.Map<Booking>(booking);
+            });
+        }
         public Task<Booking> AddBooking(Booking booking)
         {
             return Task.Run(() =>

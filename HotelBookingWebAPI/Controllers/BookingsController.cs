@@ -2,6 +2,7 @@
 using HotelBookingWebAPI.Application.Commands.Bookings.AddBooking;
 using HotelBookingWebAPI.Application.Commands.Bookings.DeleteBooking;
 using HotelBookingWebAPI.Application.Commands.Bookings.UpdateBooking;
+using HotelBookingWebAPI.Application.Queries.Bookings.GetBookingById;
 using HotelBookingWebAPI.Application.Queries.Bookings.GetBookings;
 using HotelBookingWebAPI.Domain.Models.Bookings;
 using HotelBookingWebAPI.Domain.Models.Exceptions;
@@ -37,6 +38,30 @@ namespace HotelBookingWebAPI.Controllers
                 var bookings = await _mediator.Send(new GetBookings());
                 var result = _mapper.Map<IEnumerable<BookingResponse>>(bookings);
                 return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
+        [HttpGet("{bookingNumber}")]
+        public async Task<IActionResult> Get([Required(ErrorMessage = "The field clientId is required")] 
+                                            string bookingNumber)
+        {
+            try
+            {
+                var booking = await _mediator.Send(new GetBookingById(bookingNumber));
+                var result = _mapper.Map<BookingResponse>(booking);
+                return Ok(result);
+            }
+            catch(BookingException ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, new BookingError 
+                {
+                    ErrorCode = ex.ErrorCode,
+                    Message = ex.Message
+                });
             }
             catch (Exception ex)
             {

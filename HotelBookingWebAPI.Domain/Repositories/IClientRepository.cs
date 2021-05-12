@@ -9,9 +9,10 @@ namespace HotelBookingWebAPI.Domain.Repositories
     public interface IClientRepository
     {
         Task<IEnumerable<Client>> GetClients();
+        Task<Client> GetClientById(string clientId);
         Task<Client> AddClient(Client client);
         Task<Client> UpdateClient(Client clientRequest);
-        Task<bool> Exists(string bookingNumber);
-        Task<Client> DeleteClient(string bookingNumber);
+        Task<bool> Exists(string clientId);
+        Task<Client> DeleteClient(string clientId);
     }
 }

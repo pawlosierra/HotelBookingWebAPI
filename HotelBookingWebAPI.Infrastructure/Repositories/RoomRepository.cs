@@ -33,7 +33,15 @@ namespace HotelBookingWebAPI.Infrastructure.Repositories
                 return resp;
             });
         }
-
+        public Task<Room> GetRoomById(string roomId)
+        {
+            return Task.Run(() => 
+            {
+                var rooms = _hotelContext.DeserializeRoomModel();
+                var room = rooms.Where(r => r.RoomId == roomId).First();
+                return _mapper.Map<Room>(room);
+            });
+        }
         public Task UpdateRooms(IEnumerable<Room> updateRooms)
         {
             return Task.Run(() =>
@@ -65,6 +73,19 @@ namespace HotelBookingWebAPI.Infrastructure.Repositories
                     }
                 });
                 return _mapper.Map<IEnumerable<Room>>(availableRooms);
+            });
+        }
+
+        public Task<bool> Exists(string roomId)
+        {
+            return Task.Run(()=> 
+            {
+                var rooms = _hotelContext.DeserializeRoomModel();
+                if (rooms.Any(r => r.RoomId == roomId))
+                {
+                    return true;
+                }
+                return false;
             });
         }
     }
